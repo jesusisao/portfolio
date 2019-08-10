@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="side-menu">
-      <ul>
-        <li>自己紹介</li>
-        <li>投稿したQiitaの記事</li>
-        <li>CONTACT</li>
-        <li>おまけ：テトリス？</li>
-        <li>おまけ：Slack絵文字紹介</li>
-      </ul>
+      <div class="list">
+        <nuxt-link class="link" to="/">自己紹介</nuxt-link>
+        <nuxt-link class="link" to="/my-qiita">投稿したQiitaの記事</nuxt-link>
+        <nuxt-link class="link" to="/">CONTACT</nuxt-link>
+        <nuxt-link class="link" to="/">おまけ：テトリス？</nuxt-link>
+        <nuxt-link class="link" to="/">おまけ：Slack絵文字紹介</nuxt-link>
+      </div>
       <span class="line" />
     </div>
     <nuxt />
@@ -27,13 +27,13 @@ $title-color: #8b8200;
   justify-content: center;
   align-items: center;
   text-align: center;
-  ul {
+  .list {
     padding: 0;
     margin: 0;
-    list-style-type: none;
     text-align: center;
     vertical-align: middle;
-    li {
+    .link {
+      display: block;
       background: linear-gradient(
         to right,
         rgba(255, 255, 255, 0) 0%,
@@ -41,10 +41,11 @@ $title-color: #8b8200;
         rgba(255, 255, 255, 0) 100%
       );
       color: rgb(163, 163, 163);
+      text-decoration: none;
       transition-duration: 0.2s;
       transition-timing-function: ease-in-out;
       z-index: 10;
-      & + li {
+      & + .link {
         margin-top: 10px;
       }
       &:hover {
