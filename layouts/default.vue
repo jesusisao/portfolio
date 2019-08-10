@@ -4,7 +4,7 @@
       <div class="list">
         <nuxt-link class="link" to="/">自己紹介</nuxt-link>
         <nuxt-link class="link" to="/my-qiita">投稿したQiitaの記事</nuxt-link>
-        <nuxt-link class="link" to="/">CONTACT</nuxt-link>
+        <nuxt-link class="link" to="/contact">CONTACT</nuxt-link>
         <nuxt-link class="link" to="/">おまけ：テトリス？</nuxt-link>
         <nuxt-link class="link" to="/">おまけ：Slack絵文字紹介</nuxt-link>
       </div>
