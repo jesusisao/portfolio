@@ -1,55 +1,59 @@
 <template>
   <div>
+    <div class="side-menu">
+      <ul>
+        <li>自己紹介</li>
+        <li>投稿したQiitaの記事</li>
+        <li>CONTACT</li>
+        <li>おまけ：テトリス？</li>
+        <li>おまけ：Slack絵文字紹介</li>
+      </ul>
+      <span class="line" />
+    </div>
     <nuxt />
   </div>
 </template>
 
-<style>
-html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-}
+<style lang="scss" scoped>
+$width: 250px;
 
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-  margin: 0;
-}
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+.side-menu {
+  position: fixed;
+  bottom: 50px;
+  width: $width;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    text-align: center;
+    vertical-align: middle;
+    li {
+      background-color: rgba(255, 255, 255, 0.7);
+      color: rgb(163, 163, 163);
+      transition-duration: 0.2s;
+      transition-timing-function: ease-in-out;
+      z-index: 10;
+      & + li {
+        margin-top: 10px;
+      }
+      &:hover {
+        color: #001e57;
+        font-size: 1.1em;
+      }
+    }
+  }
+  .line {
+    position: absolute;
+    left: $width / 2;
+    background-color: rgba(0, 0, 0, 0.075);
+    height: 250px;
+    width: 2px;
+    z-index: -1;
+  }
 }
 </style>

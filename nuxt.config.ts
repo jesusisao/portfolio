@@ -24,6 +24,8 @@ const nuxtConfig: NuxtConfiguration = {
   ** Global CSS
   */
   css: [
+    'normalize.css',
+    '@/assets/scss/common.scss'
   ],
   /*
   ** Plugins to load before mounting the App
@@ -41,6 +43,10 @@ const nuxtConfig: NuxtConfiguration = {
   modules: [
     // Doc: https://bootstrap-vue.js.org/docs/
     'bootstrap-vue/nuxt',
+    ['nuxt-sass-resources-loader', [
+      '@/assets/sass/config/variable.scss',
+      '@/assets/sass/config/mixin.scss',
+    ]]
   ],
   /*
   ** Build configuration
