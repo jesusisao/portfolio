@@ -24,8 +24,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$title-color: #8b8200;
-
 .wrapper {
   display: flex;
   align-items: center;

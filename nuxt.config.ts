@@ -43,11 +43,29 @@ const nuxtConfig: NuxtConfiguration = {
   modules: [
     // Doc: https://bootstrap-vue.js.org/docs/
     'bootstrap-vue/nuxt',
-    ['nuxt-sass-resources-loader', [
-      '@/assets/sass/config/variable.scss',
-      '@/assets/sass/config/mixin.scss',
-    ]]
+    'nuxt-fontawesome',
+    '@nuxtjs/style-resources'
   ],
+
+  styleResources: {
+    scss: [
+      '~/assets/scss/variable.scss' // 読みませたいscssファイルを指定します。
+    ]
+  },
+
+  fontawesome: {
+    imports: [
+      {
+        set: '@fortawesome/free-solid-svg-icons',
+        icons: ['fas']
+      },
+      {
+        set: '@fortawesome/free-brands-svg-icons',
+        icons: ['fab']
+      }
+    ]
+  },
+
   /*
   ** Build configuration
   */

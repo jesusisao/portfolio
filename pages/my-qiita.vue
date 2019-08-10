@@ -4,7 +4,7 @@
     <p>投稿したQiitaの記事のうち、特に見てほしいものをピックアップしています。</p>
     <div class="flex-container">
       <div class="contents">
-        <img src="~/assets/img/gettingoverit.jpg" />
+        <font-awesome-icon :icon="['fab', 'git-alt']" class="icon" />
         <article>
           <h1>
             <a
@@ -23,14 +23,14 @@
             なので退職時の引き継ぎ資料も兼ねてこの記事を書きました。
           </p>
           <p>
-            Gitを教える上で一番大切なことはコマンドを覚えることでもGUIの操作を覚えることでもなくて、
+            Gitを教える上で一番大切なことはコマンドを覚えることでもGUIの操作を覚えることでもなく、
             Gitの概念をちゃんと理解することだと私は考えています。この記事はその部分に焦点を置いています。
           </p>
         </article>
       </div>
 
       <div class="contents">
-        <img src="~/assets/img/gettingoverit.jpg" />
+        <font-awesome-icon :icon="['fas', 'code']" class="icon" />
         <article>
           <h1>
             <a
@@ -65,8 +65,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$title-color: #8b8200;
-
 .wrapper {
   display: flex;
   align-items: center;
@@ -92,17 +90,18 @@ $title-color: #8b8200;
     width: 700px;
     box-sizing: border-box;
     box-shadow: 0px 0px 50px -15px #9b9b9b;
-    img {
+    .icon {
       width: 100px;
-      border-radius: 50%;
-      margin: 0 30px 30px 0;
+      color: $title-color;
+      font-size: 100px;
+      margin: 0 20px 20px 0;
     }
     article {
       h1 {
         color: $title-color;
         text-align: left;
         a {
-          color: #55c500;
+          color: #55c500; // Qiitaの色
         }
       }
       p {

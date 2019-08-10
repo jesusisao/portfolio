@@ -19,7 +19,7 @@
         <h1>About page</h1>
         <p>
           このサイトは私 @jesus_isao のポートフォリオとして、
-          転職時に面接官の方に見てもらうことを想定して作られました。
+          転職時に人事の査定に関わる方に見てもらうことを想定して作られました。
         </p>
       </article>
     </div>
@@ -38,8 +38,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$title-color: #8b8200;
-
 .wrapper {
   display: flex;
   align-items: center;
