@@ -25,7 +25,7 @@ export default class AppContact extends Vue {
       title: "CONTACT",
       articles: [
         {
-          title: "連絡先",
+          title: "Mail",
           icon: ["fas", "envelope"],
           sentences: ["jesusisao@gmail.com までご連絡ください。"],
           imagePath: "/img/gettingoverit.jpg"

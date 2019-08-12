@@ -1,7 +1,7 @@
 <template>
   <div class="flex-container">
     <article class="contents" v-for="(article, index) in articles" :key="index">
-      <h1>
+      <h1 class="wf-wire-one">
         <font-awesome-icon :icon="article.icon" class="icon" />
         {{ article.title }}
       </h1>
@@ -21,10 +21,7 @@ type CardArticle = {
   imagePath?: string;
 };
 
-@Component({
-  
-})
-
+@Component
 export default class FlexCardArticles extends Vue {
   @Prop() articles!: Array<CardArticle>;
 }
@@ -60,7 +57,11 @@ export default class FlexCardArticles extends Vue {
     }
     img {
       width: 100px;
+      height: auto;
       border-radius: 50%;
+      border: 10px solid rgb(250, 250, 250);
+      box-shadow: 0px 0px 50px -15px #9b9b9b;
+      box-sizing:content-box;
     }
   }
 }

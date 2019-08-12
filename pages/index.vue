@@ -25,7 +25,7 @@ export default class AppSelfIntroduce extends Vue {
       title: "自己紹介",
       articles: [
         {
-          title: "自己紹介",
+          title: "Overview",
           icon: ["fas", "user"],
           sentences: [
             "フロントエンド技術に興味がありますが、仕事ではフロントエンド／バックエンド問わずつらいコードのリファクタリングをよくやっています。リファクタリングも嫌いじゃありません。これまでに最も感銘を受けた技術書もファウラーの『リファクタリング』です。",
@@ -34,11 +34,11 @@ export default class AppSelfIntroduce extends Vue {
           imagePath: "/img/gettingoverit.jpg"
         },
         {
-          title: "スキルセット",
+          title: "Skill",
           icon: ["fas", "wrench"]
         },
         {
-          title: "趣味",
+          title: "Hobby",
           icon: ["fas", "gamepad"]
         },
         {
