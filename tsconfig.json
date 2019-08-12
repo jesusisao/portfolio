@@ -29,9 +29,7 @@
     "allowJs": true,
     "types": [
       "@types/node",
-      "@nuxtjs/axios",
-      "./types/nuxt",
-      "./types/vuex"
+      "@nuxt/vue-app"
     ]
   },
   "include": [
