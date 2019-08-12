@@ -92,7 +92,7 @@ export default {
     box-shadow: 0px 0px 50px -15px #9b9b9b;
     .icon {
       width: 100px;
-      color: $title-color;
+      color: #dadada;
       font-size: 100px;
       margin: 0 20px 20px 0;
     }
