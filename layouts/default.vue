@@ -5,18 +5,21 @@
         <nuxt-link class="link" to="/">自己紹介</nuxt-link>
         <nuxt-link class="link" to="/my-qiita">投稿したQiitaの記事</nuxt-link>
         <nuxt-link class="link" to="/contact">CONTACT</nuxt-link>
-        <nuxt-link class="link" to="/">おまけ：テトリス？</nuxt-link>
-        <nuxt-link class="link" to="/">おまけ：Slack絵文字紹介</nuxt-link>
+        <nuxt-link class="link" to="/">俺のSlack絵文字</nuxt-link>
       </div>
       <span class="line" />
     </div>
-    <nuxt />
+    <nuxt class="main" />
   </div>
 </template>
 
 <style lang="scss" scoped>
-$width: 250px;
+$width: 180px;
 $title-color: #8b8200;
+
+.main {
+  margin-left: $width;
+}
 
 .side-menu {
   position: fixed;
@@ -29,17 +32,12 @@ $title-color: #8b8200;
   text-align: center;
   .list {
     padding: 0;
-    margin: 0;
-    text-align: center;
+    margin: 0 0 0 20px;
+    text-align: left;
     vertical-align: middle;
+    font-size: 0.8em;
     .link {
       display: block;
-      background: linear-gradient(
-        to right,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 1) 50%,
-        rgba(255, 255, 255, 0) 100%
-      );
       color: rgb(163, 163, 163);
       text-decoration: none;
       transition-duration: 0.2s;
@@ -50,13 +48,13 @@ $title-color: #8b8200;
       }
       &:hover {
         color: $title-color;
-        font-size: 1.1em;
       }
     }
   }
   .line {
+    display: inline-block;
     position: absolute;
-    left: $width / 2;
+    left: 10px;
     background: linear-gradient(
       to bottom,
       rgba(200, 200, 200, 0) 0%,
