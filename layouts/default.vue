@@ -54,7 +54,7 @@ $title-color: #8b8200;
   .line {
     display: inline-block;
     position: absolute;
-    left: 10px;
+    left: 20px;
     background: linear-gradient(
       to bottom,
       rgba(200, 200, 200, 0) 0%,

@@ -1,7 +1,17 @@
 <template>
   <div class="wrapper">
     <h1 class="title">投稿したQiitaの記事</h1>
-    <p>投稿したQiitaの記事のうち、特に見てほしいものをピックアップしています。</p>
+    <p>
+      投稿したQiitaの記事のうち、特に見てほしいものをピックアップしています。
+    </p>
+    <p>
+      Qiitaのマイページは
+      <a
+        href="https://qiita.com/jesus_isao"
+        target="_blank"
+        rel="noopener noreferrer"
+      >こちら</a>です。
+    </p>
     <div class="flex-container">
       <div class="contents">
         <font-awesome-icon :icon="['fab', 'git-alt']" class="icon" />
