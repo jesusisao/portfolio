@@ -16,12 +16,13 @@ import { Vue, Component } from "vue-property-decorator";
 export default class AppContact extends Vue {
   head() {
     return {
-      title: "CONTACT"
+      title: this.data().title
     };
   }
 
   data() {
     return {
+      title: "CONTACT",
       articles: [
         {
           title: "連絡先",

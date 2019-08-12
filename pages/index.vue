@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <h1 class="title">自己紹介</h1>
+    <h1 class="title">{{ title }}</h1>
     <flex-card-articles :articles="articles" />
   </div>
 </template>
@@ -16,12 +16,13 @@ import { Vue, Component } from "vue-property-decorator";
 export default class AppSelfIntroduce extends Vue {
   head() {
     return {
-      title: "自己紹介"
+      title: this.data().title
     };
   }
 
   data() {
     return {
+      title: "自己紹介",
       articles: [
         {
           title: "自己紹介",
