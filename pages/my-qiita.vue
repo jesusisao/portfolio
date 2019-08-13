@@ -1,9 +1,7 @@
 <template>
   <div class="wrapper">
     <h1 class="title">投稿したQiitaの記事</h1>
-    <p>
-      投稿したQiitaの記事のうち、特に見てほしいものをピックアップしています。
-    </p>
+    <p>投稿したQiitaの記事のうち、特に見てほしいものをピックアップしています。</p>
     <p>
       Qiitaのマイページは
       <a
@@ -12,81 +10,86 @@
         rel="noopener noreferrer"
       >こちら</a>です。
     </p>
-    <div class="flex-container" ref="articlesWrapper">
-      <div class="contents">
-        <font-awesome-icon :icon="['fab', 'git-alt']" class="icon" />
-        <article>
-          <h1>
-            <a
-              href="https://qiita.com/jesus_isao/items/63557eba36819faa4ad9"
-              target="_blank"
-              rel="noopener noreferrer"
-            >君には1時間でGitについて知ってもらう(with VSCode)</a>
-          </h1>
-          <p>
-            QiitaのSEO効果もあり、ありがたいことにGitで検索すると5番目くらいに出てくれます(2019/08/10 現在)。
-            一番読まれた時でQiitaのトレンドの月間2位まで行きました。
-          </p>
-          <p>
-            私自身はGitを1人でよく分からないまま使い始め、長い時間をかけて少しずつ学びましたが、
-            後進の人たちにはそんなしなくてもいい苦労をして欲しくありませんでした。
-            なので退職時の引き継ぎ資料も兼ねてこの記事を書きました。
-          </p>
-          <p>
-            Gitを教える上で一番大切なことはコマンドを覚えることでもGUIの操作を覚えることでもなく、
-            Gitの概念をちゃんと理解することだと私は考えています。この記事はその部分に焦点を置いています。
-          </p>
-        </article>
-      </div>
 
-      <div class="contents">
-        <font-awesome-icon :icon="['fas', 'code']" class="icon" />
+    <div class="flex-container" ref="articlesWrapper">
+      <div
+        class="contents"
+        v-for="(article, index) in articles"
+        :key="index"
+        :ref="`article${index}`"
+      >
+        <font-awesome-icon :icon="article.icon" class="icon" />
         <article>
           <h1>
-            <a
-              href="https://qiita.com/jesus_isao/items/4b6b7846ccf5eb46b1bc"
-              target="_blank"
-              rel="noopener noreferrer"
-            >プログラマーを惑わせる３種類の委譲(委譲・Delegation／転送・Forwarding／.NET Delegates)</a>
+            <a :href="article.url" target="_blank" rel="noopener noreferrer">{{ article.title }}</a>
           </h1>
-          <p>
-            一番最初に書いた記事です。
-            そして同時に、今まで書いた記事の中で最も苦労して調査をして勉強しながら書いた記事なので、思い入れがあります。
-          </p>
-          <p>
-            「委譲」は私にとって長い間謎だった概念で、
-            モヤモヤしながらプログラミングしていたので、正体が分かった時はとてもスッキリしました。
-            記事を読む人にもそのモヤモヤをスッキリして欲しいなと思って書きました。
-          </p>
+          <p v-for="(sentence, i) in article.sentences" :key="i">{{ sentence }}</p>
         </article>
       </div>
     </div>
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { Vue, Component } from "vue-property-decorator";
+import { TweenMax, Expo } from "gsap";
+
+type QiitaArticle = {
+  title: string;
+  url: string;
+  icon?: [string, string];
+  sentences?: string[];
+};
+
+@Component
+export default class MyQiita extends Vue {
   head() {
     return {
       title: "投稿したQiitaの記事"
     };
-  },
-  mounted() {
-    TweenMax.fromTo(
-      this.$refs.articlesWrapper,
-      0.8,
-      {
-        opacity: 0,
-        yPercent: 30
-      },
-      {
-        opacity: 1,
-        ease: Expo.easeOut,
-        yPercent: 0
-      }
-    );
   }
-};
+
+  public readonly articles: Array<QiitaArticle> = [
+    {
+      title: "君には1時間でGitについて知ってもらう(with VSCode)",
+      url: "https://qiita.com/jesus_isao/items/63557eba36819faa4ad9",
+      icon: ["fab", "git-alt"],
+      sentences: [
+        "QiitaのSEO効果もあり、ありがたいことにGitで検索すると5番目くらいに出てくれます(2019/08/10 現在)。一番読まれた時でQiitaのトレンドの月間2位まで行きました。",
+        "私自身はGitを1人でよく分からないまま使い始め、長い時間をかけて少しずつ学びましたが、後進の人たちにはそんなしなくてもいい苦労をして欲しくありませんでした。なので退職時の引き継ぎ資料も兼ねてこの記事を書きました。"
+      ]
+    },
+    {
+      title:
+        "プログラマーを惑わせる３種類の委譲(委譲・Delegation／転送・Forwarding／.NET Delegates)",
+      url: "https://qiita.com/jesus_isao/items/4b6b7846ccf5eb46b1bc",
+      icon: ["fas", "code"],
+      sentences: [
+        "一番最初に書いた記事です。そして同時に、今まで書いた記事の中で最も苦労して調査をして勉強しながら書いた記事なので、思い入れがあります。",
+        "「委譲」は私にとって長い間謎だった概念で、モヤモヤしながらプログラミングしていたので、正体が分かった時はとてもスッキリしました。記事を読む人にもそのモヤモヤをスッキリして欲しいなと思って書きました。"
+      ]
+    }
+  ];
+
+  mounted() {
+    for (let i = 0; i < this.articles.length; i++) {
+      TweenMax.fromTo(
+        this.$refs["article" + i],
+        0.8,
+        {
+          opacity: 0,
+          yPercent: 30
+        },
+        {
+          opacity: 1,
+          ease: Expo.easeOut,
+          delay: 0.2 * i,
+          yPercent: 0
+        }
+      );
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

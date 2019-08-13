@@ -18,23 +18,19 @@ import { Vue, Component } from "vue-property-decorator";
 export default class AppContact extends Vue {
   head() {
     return {
-      title: this.data().title
+      title: this.title
     };
   }
 
-  data() {
-    return {
-      title: "CONTACT",
-      articles: [
-        {
-          title: "Mail",
-          icon: ["fas", "envelope"],
-          sentences: ["jesusisao@gmail.com までご連絡ください。"],
-          imagePath: "/img/gettingoverit.jpg"
-        }
-      ]
-    };
-  }
+  public readonly title: string = "CONTACT";
+  public readonly articles = [
+    {
+      title: "Mail",
+      icon: ["fas", "envelope"],
+      sentences: ["jesusisao@gmail.com までご連絡ください。"],
+      imagePath: "/img/gettingoverit.jpg"
+    }
+  ];
 }
 </script>
 

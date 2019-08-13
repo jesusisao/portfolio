@@ -18,41 +18,37 @@ import { Vue, Component } from "vue-property-decorator";
 export default class AppSelfIntroduce extends Vue {
   head() {
     return {
-      title: this.data().title
+      title: this.title
     };
   }
 
-  data() {
-    return {
-      title: "自己紹介",
-      articles: [
-        {
-          title: "Overview",
-          icon: ["fas", "user"],
-          sentences: [
-            "フロントエンド技術に興味がありますが、仕事ではフロントエンド／バックエンド問わずつらいコードのリファクタリングをよくやっています。リファクタリングも嫌いじゃありません。これまでに最も感銘を受けた技術書もファウラーの『リファクタリング』です。",
-            "アイコン画像はGetting Over It with Bennett Foddyというゲームの主人公ディオゲネスです。このゲームに一時期ハマっており、200回以上クリアしました。"
-          ],
-          imagePath: "/img/gettingoverit.jpg"
-        },
-        {
-          title: "Skill",
-          icon: ["fas", "wrench"]
-        },
-        {
-          title: "Hobby",
-          icon: ["fas", "gamepad"]
-        },
-        {
-          title: "About page",
-          icon: ["fas", "sitemap"],
-          sentences: [
-            "このサイトは私 @jesus_isao のポートフォリオとして、転職時に人事の査定に関わる方に見てもらうことを想定して作られました。"
-          ]
-        }
+  public readonly title: string = "自己紹介";
+  public readonly articles = [
+    {
+      title: "Overview",
+      icon: ["fas", "user"],
+      sentences: [
+        "フロントエンド技術に興味がありますが、仕事ではフロントエンド／バックエンド問わずつらいコードのリファクタリングをよくやっています。リファクタリングも嫌いじゃありません。これまでに最も感銘を受けた技術書もファウラーの『リファクタリング』です。",
+        "アイコン画像はGetting Over It with Bennett Foddyというゲームの主人公ディオゲネスです。このゲームに一時期ハマっており、200回以上クリアしました。"
+      ],
+      imagePath: "/img/gettingoverit.jpg"
+    },
+    {
+      title: "Skill",
+      icon: ["fas", "wrench"]
+    },
+    {
+      title: "Hobby",
+      icon: ["fas", "gamepad"]
+    },
+    {
+      title: "About page",
+      icon: ["fas", "sitemap"],
+      sentences: [
+        "このサイトは私 @jesus_isao のポートフォリオとして、転職時に人事の査定に関わる方に見てもらうことを想定して作られました。"
       ]
-    };
-  }
+    }
+  ];
 }
 </script>
 
