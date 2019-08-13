@@ -5,7 +5,7 @@
         <nuxt-link class="link" to="/">自己紹介</nuxt-link>
         <nuxt-link class="link" to="/my-qiita">投稿したQiitaの記事</nuxt-link>
         <nuxt-link class="link" to="/contact">CONTACT</nuxt-link>
-        <nuxt-link class="link" to="/">俺のSlack絵文字</nuxt-link>
+        <nuxt-link class="link" to="/particle">パーティクル</nuxt-link>
       </div>
       <span class="line" />
     </div>
