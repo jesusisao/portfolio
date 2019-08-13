@@ -12,7 +12,7 @@
         rel="noopener noreferrer"
       >こちら</a>です。
     </p>
-    <div class="flex-container">
+    <div class="flex-container" ref="articlesWrapper">
       <div class="contents">
         <font-awesome-icon :icon="['fab', 'git-alt']" class="icon" />
         <article>
@@ -24,7 +24,7 @@
             >君には1時間でGitについて知ってもらう(with VSCode)</a>
           </h1>
           <p>
-            Qiita効果もあり、ありがたいことにGitで検索すると5番目くらいに出てくれます(2019/08/10 現在)。
+            QiitaのSEO効果もあり、ありがたいことにGitで検索すると5番目くらいに出てくれます(2019/08/10 現在)。
             一番読まれた時でQiitaのトレンドの月間2位まで行きました。
           </p>
           <p>
@@ -70,6 +70,21 @@ export default {
     return {
       title: "投稿したQiitaの記事"
     };
+  },
+  mounted() {
+    TweenMax.fromTo(
+      this.$refs.articlesWrapper,
+      0.8,
+      {
+        opacity: 0,
+        yPercent: 30
+      },
+      {
+        opacity: 1,
+        ease: Expo.easeOut,
+        yPercent: 0
+      }
+    );
   }
 };
 </script>

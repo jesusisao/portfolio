@@ -1,12 +1,15 @@
 <template>
   <div class="wrapper">
-    <h1 class="title">{{ title }}</h1>
-    <flex-card-articles :articles="articles" />
+    <h1 class="title" ref="title">{{ title }}</h1>
+    <div ref="articlesWrapper">
+      <flex-card-articles :articles="articles" />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
+import { TweenMax, Expo } from "gsap";
 
 @Component({
   components: {
@@ -32,6 +35,22 @@ export default class AppContact extends Vue {
         }
       ]
     };
+  }
+
+  mounted() {
+    TweenMax.fromTo(
+      this.$refs.articlesWrapper,
+      0.8,
+      {
+        opacity: 0,
+        yPercent: 30
+      },
+      {
+        opacity: 1,
+        ease: Expo.easeOut,
+        yPercent: 0
+      }
+    );
   }
 }
 </script>
