@@ -1,6 +1,11 @@
 <template>
   <div class="flex-container">
-    <article class="contents" v-for="(article, index) in articles" :key="index">
+    <article
+      class="contents"
+      v-for="(article, index) in articles"
+      :key="index"
+      :ref="`article${index}`"
+    >
       <h1 class="wf-wire-one">
         <font-awesome-icon :icon="article.icon" class="icon" />
         {{ article.title }}
@@ -13,6 +18,7 @@
 
 <script lang="ts">
 import { Vue, Prop, Component } from "vue-property-decorator";
+import { TweenMax, Expo } from "gsap";
 
 type CardArticle = {
   title: string;
@@ -24,6 +30,25 @@ type CardArticle = {
 @Component
 export default class FlexCardArticles extends Vue {
   @Prop() articles!: Array<CardArticle>;
+
+  mounted() {
+    for (let i = 0; i < this.articles.length; i++) {
+      TweenMax.fromTo(
+        this.$refs["article" + i],
+        0.8,
+        {
+          opacity: 0,
+          yPercent: 30
+        },
+        {
+          opacity: 1,
+          ease: Expo.easeOut,
+          delay: 0.2 * i,
+          yPercent: 0
+        }
+      );
+    }
+  }
 }
 </script>
 
@@ -61,7 +86,7 @@ export default class FlexCardArticles extends Vue {
       border-radius: 50%;
       border: 10px solid rgb(250, 250, 250);
       box-shadow: 0px 0px 50px -15px #9b9b9b;
-      box-sizing:content-box;
+      box-sizing: content-box;
     }
   }
 }
