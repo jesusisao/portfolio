@@ -97,9 +97,9 @@ export default class MyQiita extends Vue {
   display: flex;
   align-items: center;
   flex-direction: column;
-  h1 {
-    color: $title-color;
-    text-shadow:0px 0px 7px #faffe8;
+  .title {
+    color: $header-title-color;
+    text-shadow:0px 0px 7px #242424;
   }
 }
 

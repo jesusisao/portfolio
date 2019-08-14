@@ -148,7 +148,7 @@ export default class Particle extends Vue {
   overflow: hidden;
   position: relative;
   canvas {
-    background-color: #666666;
+    background-color: #444444;
   }
 }
 </style>
