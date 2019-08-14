@@ -111,6 +111,7 @@ export default class MyQiita extends Vue {
   text-align: center;
   .contents {
     display: flex;
+    background-color: $background-color;
     flex-direction: row;
     align-items: center;
     padding: 30px;

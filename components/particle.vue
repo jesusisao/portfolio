@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper" ref="canvasWrapper">
-    <canvas id="canvas" ref="canvas" style="background-color:white;"></canvas>
+    <canvas id="canvas" ref="canvas"></canvas>
   </div>
 </template>
 
@@ -17,11 +17,11 @@ type Position = {
 class Dot {
   private static baseSize = 5;
 
-  private randomDepth = Math.random()
+  private randomDepth = Math.random();
   private size = Math.floor(this.randomDepth * 120) + Dot.baseSize;
   private blur = this.calcBlurPx(this.randomDepth);
-  private alpha = (1 - this.randomDepth) + 0.5;
-  private color = "#EEEEEE";
+  private alpha = 1 - this.randomDepth + 0.5;
+  private color = "#9b90b0";
   private speed = (1 - this.randomDepth) * 0.8;
   private rot = Math.random() * 360; // ランダムな角度
   private angle = (this.rot * Math.PI) / 180;
@@ -45,14 +45,14 @@ class Dot {
     };
   }
 
-  private calcBlurPx(randomDepth) {
+  private calcBlurPx(randomDepth: number) {
     if (randomDepth < 0.5) {
-      return 3
+      return 3;
     }
     if (randomDepth >= 0.8) {
-      return 15
+      return 15;
     }
-    return randomDepth * 15
+    return randomDepth * 15;
   }
 
   public draw(canvasCtx: any) {
@@ -102,12 +102,12 @@ export default class Particle extends Vue {
     for (var i = 0; i < Particle.density; i++) {
       this.dots.push(new Dot(canvasWidth, canvasHeight));
     }
-    this.update(canvasContext, canvasWidth, canvasHeight);
+    this.updateCanvas(canvasContext, canvasWidth, canvasHeight);
   }
 
-  update(canvasContext: any, canvasWidth: number, canvasHeight: number) {
+  updateCanvas(canvasContext: any, canvasWidth: number, canvasHeight: number) {
     const forRecursion = () =>
-      this.update(canvasContext, canvasWidth, canvasHeight);
+      this.updateCanvas(canvasContext, canvasWidth, canvasHeight);
     canvasContext.clearRect(0, 0, canvasWidth, canvasHeight);
     requestAnimationFrame(forRecursion);
 

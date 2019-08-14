@@ -61,6 +61,7 @@ export default class FlexCardArticles extends Vue {
   justify-content: left;
   text-align: center;
   .contents {
+    background-color: $background-color;
     display: flex;
     flex-direction: column;
     flex-grow: 1;

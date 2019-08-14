@@ -1,24 +1,52 @@
 <template>
   <div>
-    <div class="side-menu">
-      <div class="list">
-        <nuxt-link class="link" to="/">自己紹介</nuxt-link>
-        <nuxt-link class="link" to="/my-qiita">投稿したQiitaの記事</nuxt-link>
-        <nuxt-link class="link" to="/contact">CONTACT</nuxt-link>
-        <nuxt-link class="link" to="/particle">パーティクル</nuxt-link>
+    <particle class="back-canvas" />
+    <div class="front">
+      <div class="side-menu">
+        <div class="list">
+          <nuxt-link class="link" to="/">自己紹介</nuxt-link>
+          <nuxt-link class="link" to="/my-qiita">投稿したQiitaの記事</nuxt-link>
+          <nuxt-link class="link" to="/contact">CONTACT</nuxt-link>
+        </div>
+        <span class="line" />
       </div>
-      <span class="line" />
+      <nuxt class="main" />
     </div>
-    <nuxt class="main" />
   </div>
 </template>
+
+<script lang="ts">
+import { Vue, Component } from "vue-property-decorator";
+
+@Component({
+  components: {
+    Particle: () => import("~/components/particle.vue")
+  }
+})
+export default class DefaultMenu extends Vue {}
+</script>
 
 <style lang="scss" scoped>
 $width: 180px;
 $title-color: #8b8200;
 
-.main {
-  margin-left: $width;
+.back-canvas {
+  position: fixed;
+  height:100%;
+  top: 0;
+  left: 0;
+}
+
+.front {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  .main {
+    margin-left: $width;
+  }
 }
 
 .side-menu {
