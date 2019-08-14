@@ -99,6 +99,7 @@ export default class MyQiita extends Vue {
   flex-direction: column;
   h1 {
     color: $title-color;
+    text-shadow:0px 0px 7px #faffe8;
   }
 }
 
@@ -121,7 +122,7 @@ export default class MyQiita extends Vue {
     box-shadow: 0px 0px 50px -15px #9b9b9b;
     .icon {
       width: 100px;
-      color: #dadada;
+      color: #838383;
       font-size: 100px;
       margin: 0 20px 20px 0;
     }

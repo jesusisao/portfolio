@@ -41,6 +41,7 @@ export default class AppContact extends Vue {
   flex-direction: column;
   h1 {
     color: $title-color;
+    text-shadow:0px 0px 7px #faffe8;
   }
 }
 </style>

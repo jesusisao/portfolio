@@ -12,7 +12,7 @@ type Position = {
   y: number;
 };
 
-// 参考：https://www.webopixel.net/javascript/1271.html
+// 改造元：https://www.webopixel.net/javascript/1271.html
 
 class Dot {
   private static baseSize = 5;
@@ -128,5 +128,8 @@ export default class Particle extends Vue {
   height: 100vh;
   overflow: hidden;
   position: relative;
+  canvas {
+    background-color: #666666;
+  }
 }
 </style>
