@@ -86,7 +86,7 @@ const isElement = (x: any): x is Element => x instanceof Element;
 
 @Component
 export default class Particle extends Vue {
-  private static density: number = 50;
+  private static density: number = 20;
   private dots: Array<Dot> = [];
 
   mounted() {
