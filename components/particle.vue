@@ -55,7 +55,7 @@ class Dot {
 
   private calcBlurPx(randomDepth: number) {
     if (randomDepth < 0.5) {
-      return 3;
+      return 2;
     }
     if (randomDepth >= 0.8) {
       return 15;
@@ -78,14 +78,14 @@ class Dot {
     this.pos.y += this.vec.y;
 
     // 画面外に出たら反対へ再配置
-    if (this.pos.x > this.canvasWidth + 100) {
-      this.pos.x = -100;
-    } else if (this.pos.x < -100) {
-      this.pos.x = this.canvasWidth + 100;
-    } else if (this.pos.y > this.canvasHeight + 100) {
-      this.pos.y = -100;
-    } else if (this.pos.y < -100) {
-      this.pos.y = this.canvasHeight + 100;
+    if (this.pos.x > this.canvasWidth + 200) {
+      this.pos.x = -200;
+    } else if (this.pos.x < -200) {
+      this.pos.x = this.canvasWidth + 200;
+    } else if (this.pos.y > this.canvasHeight + 200) {
+      this.pos.y = -200;
+    } else if (this.pos.y < -200) {
+      this.pos.y = this.canvasHeight + 200;
     }
   }
 }
