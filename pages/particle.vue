@@ -15,13 +15,14 @@ type Position = {
 // 参考：https://www.webopixel.net/javascript/1271.html
 
 class Dot {
-  private static baseSize = 3;
-  private static colors = ["#eeb900", "#6DD0A5", "#f799db"];
-  private static baseSpeed = 10;
+  private static baseSize = 5;
 
-  private size = Math.floor(Math.random() * 6) + Dot.baseSize; //大きさ
-  private color = Dot.colors[~~(Math.random() * 3)]; //色
-  private speed = this.size / Dot.baseSpeed; // 大きさによって速度変更
+  private randomDepth = Math.random()
+  private size = Math.floor(this.randomDepth * 120) + Dot.baseSize;
+  private blur = this.calcBlurPx(this.randomDepth);
+  private alpha = (1 - this.randomDepth) + 0.5;
+  private color = "#EEEEEE";
+  private speed = (1 - this.randomDepth) * 0.8;
   private rot = Math.random() * 360; // ランダムな角度
   private angle = (this.rot * Math.PI) / 180;
   private pos: Position;
@@ -44,7 +45,19 @@ class Dot {
     };
   }
 
+  private calcBlurPx(randomDepth) {
+    if (randomDepth < 0.5) {
+      return 3
+    }
+    if (randomDepth >= 0.8) {
+      return 15
+    }
+    return randomDepth * 15
+  }
+
   public draw(canvasCtx: any) {
+    canvasCtx.globalAlpha = this.alpha;
+    canvasCtx.filter = `blur(${this.blur}px)`;
     canvasCtx.fillStyle = this.color;
     canvasCtx.beginPath();
     canvasCtx.arc(this.pos.x, this.pos.y, this.size, 0, 2 * Math.PI, false);
@@ -57,14 +70,14 @@ class Dot {
     this.pos.y += this.vec.y;
 
     // 画面外に出たら反対へ再配置
-    if (this.pos.x > this.canvasWidth + 10) {
-      this.pos.x = -5;
-    } else if (this.pos.x < 0 - 10) {
-      this.pos.x = this.canvasWidth + 5;
-    } else if (this.pos.y > this.canvasHeight + 10) {
-      this.pos.y = -5;
-    } else if (this.pos.y < 0 - 10) {
-      this.pos.y = this.canvasHeight + 5;
+    if (this.pos.x > this.canvasWidth + 100) {
+      this.pos.x = -100;
+    } else if (this.pos.x < -100) {
+      this.pos.x = this.canvasWidth + 100;
+    } else if (this.pos.y > this.canvasHeight + 100) {
+      this.pos.y = -100;
+    } else if (this.pos.y < -100) {
+      this.pos.y = this.canvasHeight + 100;
     }
   }
 }
@@ -73,7 +86,7 @@ const isElement = (x: any): x is Element => x instanceof Element;
 
 @Component
 export default class Particle extends Vue {
-  private static density: number = 70;
+  private static density: number = 50;
   private dots: Array<Dot> = [];
 
   mounted() {
@@ -115,9 +128,5 @@ export default class Particle extends Vue {
   height: 100vh;
   overflow: hidden;
   position: relative;
-  canvas {
-    // width: auto;
-    // height: 100%;
-  }
 }
 </style>
