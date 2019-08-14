@@ -12,13 +12,21 @@ type Position = {
   y: number;
 };
 
+const calcAbnormalRandom: () => number = () => {
+  const normalR = Math.random()
+  if (normalR > 0.7 || normalR < 0.3) {
+    return normalR
+  }
+  return calcAbnormalRandom()
+}
+
 // 改造元：https://www.webopixel.net/javascript/1271.html
 
 class Dot {
   private static baseSize = 5;
 
-  private randomDepth = Math.random();
-  private size = Math.floor(this.randomDepth * 120) + Dot.baseSize;
+  private randomDepth = calcAbnormalRandom();
+  private size = Math.floor(this.randomDepth * 150) + Dot.baseSize;
   private blur = this.calcBlurPx(this.randomDepth);
   private alpha = 1 - this.randomDepth + 0.5;
   private color = "#9b90b0";
@@ -86,7 +94,7 @@ const isElement = (x: any): x is Element => x instanceof Element;
 
 @Component
 export default class Particle extends Vue {
-  private static density: number = 20;
+  private static density: number = 15;
   private dots: Array<Dot> = [];
 
   mounted() {

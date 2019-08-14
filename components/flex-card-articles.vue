@@ -70,7 +70,7 @@ export default class FlexCardArticles extends Vue {
     margin: 10px;
     width: 400px;
     box-sizing: border-box;
-    box-shadow: 0px 0px 50px -15px #9b9b9b;
+    box-shadow: 0px 0px 50px -15px #1a1a1a;
     h1 {
       color: $title-color;
       .icon {

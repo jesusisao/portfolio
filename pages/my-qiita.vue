@@ -119,7 +119,7 @@ export default class MyQiita extends Vue {
     margin: 10px;
     max-width: 700px;
     box-sizing: border-box;
-    box-shadow: 0px 0px 50px -15px #9b9b9b;
+    box-shadow: 0px 0px 50px -15px #1a1a1a;
     .icon {
       width: 100px;
       color: #838383;
