@@ -13,23 +13,23 @@ type Position = {
 };
 
 const calcAbnormalRandom: () => number = () => {
-  const normalR = Math.random()
+  const normalR = Math.random();
   if (normalR > 0.7 || normalR < 0.3) {
-    return normalR
+    return normalR;
   }
-  return calcAbnormalRandom()
-}
+  return calcAbnormalRandom();
+};
 
 // 改造元：https://www.webopixel.net/javascript/1271.html
 
 class Dot {
-  private static baseSize = 5;
+  private static baseSize = 3;
 
   private randomDepth = calcAbnormalRandom();
-  private size = Math.floor(this.randomDepth * 150) + Dot.baseSize;
+  private size = Math.floor(this.randomDepth * 120) + Dot.baseSize;
   private blur = this.calcBlurPx(this.randomDepth);
   private alpha = 1 - this.randomDepth + 0.5;
-  private color = "#9b90b0";
+  private color = this.calcColor(this.randomDepth);
   private speed = (1 - this.randomDepth) * 0.8;
   private rot = Math.random() * 360; // ランダムな角度
   private angle = (this.rot * Math.PI) / 180;
@@ -61,6 +61,17 @@ class Dot {
       return 15;
     }
     return randomDepth * 15;
+  }
+
+  private calcColor(randomDepth: number) {
+    const originR = 145;
+    const originG = 134;
+    const originB = 166;
+    const r = (1 - randomDepth - 0.5) * 100;
+    const afterR = originR + r;
+    const afterG = originG + r;
+    const afterB = originB + r;
+    return `rgb(${afterR}, ${afterG}, ${afterB})`;
   }
 
   public draw(canvasCtx: any) {
