@@ -24,7 +24,7 @@ import { Vue, Component } from "vue-property-decorator";
     Particle: () => import("~/components/particle.vue")
   }
 })
-export default class DefaultMenu extends Vue {}
+export default class extends Vue {}
 </script>
 
 <style lang="scss" scoped>
@@ -71,6 +71,7 @@ $title-color: #8b8200;
       display: block;
       color: rgb(163, 163, 163);
       text-decoration: none;
+      text-shadow: 0px 0px 7px #242424;
       transition-duration: 0.2s;
       transition-timing-function: ease-in-out;
       z-index: 10;

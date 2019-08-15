@@ -15,7 +15,7 @@ import { Vue, Component } from "vue-property-decorator";
     FlexCardArticles: () => import("~/components/flex-card-articles.vue")
   }
 })
-export default class AppContact extends Vue {
+export default class extends Vue {
   head() {
     return {
       title: this.title
@@ -41,7 +41,7 @@ export default class AppContact extends Vue {
   flex-direction: column;
   .title {
     color: $header-title-color;
-    text-shadow:0px 0px 7px #242424;
+    text-shadow:0px 0px 7px #dfe49a;
   }
 }
 </style>

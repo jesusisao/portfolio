@@ -64,9 +64,9 @@ class Dot {
   }
 
   private calcColor(randomDepth: number) {
-    const originR = 145;
-    const originG = 134;
-    const originB = 166;
+    const originR = 196;
+    const originG = 189;
+    const originB = 155;
     const r = (1 - randomDepth - 0.5) * 100;
     const afterR = originR + r;
     const afterG = originG + r;
@@ -128,7 +128,7 @@ export default class Particle extends Vue {
     const forRecursion = () =>
       this.updateCanvas(canvasContext, canvasWidth, canvasHeight);
     canvasContext.clearRect(0, 0, canvasWidth, canvasHeight);
-    requestAnimationFrame(forRecursion);
+    const pid = requestAnimationFrame(forRecursion);
 
     for (var i = 0; i < Particle.density; i++) {
       this.dots[i].update(canvasContext);
@@ -165,9 +165,9 @@ export default class Particle extends Vue {
   height: 100vh;
   overflow: hidden;
   position: relative;
-  background-color: rgb(68, 68, 68);
+  background-color: rgb(255, 255, 255);
   canvas {
-    background-color: rgb(68, 68, 68);
+    background-color: rgb(255, 255, 255);
   }
 }
 </style>

@@ -15,7 +15,7 @@ import { Vue, Component } from "vue-property-decorator";
     FlexCardArticles: () => import("~/components/flex-card-articles.vue")
   }
 })
-export default class AppSelfIntroduce extends Vue {
+export default class extends Vue {
   head() {
     return {
       title: this.title
@@ -28,7 +28,7 @@ export default class AppSelfIntroduce extends Vue {
       title: "Overview",
       icon: ["fas", "user"],
       sentences: [
-        "4年目エンジニアです。フロントエンド技術に興味がありますが、仕事ではフロントエンド／バックエンド問わずリファクタリングをよくやっています。リファクタリングも嫌いではなく、コードが綺麗になっていく過程に快感を覚えます。これまでに最も感銘を受けた技術書もMartin Fowlerの『リファクタリング』です。",
+        "4年目エンジニアです。フロントエンド技術に興味がありますが、仕事ではフロントエンド／バックエンド問わずリファクタリングをよくやっています。リファクタリングも嫌いではなく、コードが綺麗になっていく過程が好きです。これまでに最も感銘を受けた技術書もMartin Fowlerの『リファクタリング』です。",
         "アイコン画像はGetting Over It with Bennett Foddyというゲームの主人公ディオゲネスです。このゲームに一時期ハマっており、200回以上クリアしました。"
       ],
       imagePath: "/img/gettingoverit.jpg"
@@ -197,7 +197,7 @@ export default class AppSelfIntroduce extends Vue {
   flex-direction: column;
   .title {
     color: $header-title-color;
-    text-shadow: 0px 0px 7px #242424;
+    text-shadow: 0px 0px 7px #dfe49a;
   }
 }
 </style>

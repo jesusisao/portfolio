@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <h1 class="title">投稿したQiitaの記事</h1>
+    <h1 class="title">{{ title }}</h1>
     <p>投稿したQiitaの記事のうち、特に見てほしいものをピックアップしています。</p>
     <p>
       Qiitaのマイページは
@@ -42,12 +42,14 @@ type QiitaArticle = {
 };
 
 @Component
-export default class MyQiita extends Vue {
+export default class extends Vue {
   head() {
     return {
-      title: "投稿したQiitaの記事"
+      title: this.title
     };
   }
+
+  public readonly title: string = "投稿したQiitaの記事";
 
   public readonly articles: Array<QiitaArticle> = [
     {
@@ -107,7 +109,7 @@ export default class MyQiita extends Vue {
   flex-direction: column;
   .title {
     color: $header-title-color;
-    text-shadow: 0px 0px 7px #242424;
+    text-shadow: 0px 0px 7px #dfe49a;
   }
   p {
     color: $header-title-color;
