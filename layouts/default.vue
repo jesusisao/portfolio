@@ -60,6 +60,22 @@ $title-color: #8b8200;
   overflow: scroll;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
+  &::-webkit-scrollbar {
+    width: 15px;
+  }
+  /*スクロールバーの背景色・角丸指定*/
+  &::-webkit-scrollbar-track {
+    border-radius: 0px;
+    background: rgba(0, 0, 0, 0);
+  }
+  /*スクロールバーの色・角丸指定*/
+  &::-webkit-scrollbar-thumb {
+    border-radius: 0px;
+    background: rgba(254, 255, 173, 0.5);
+  }
+  &::-webkit-scrollbar-corner {
+    display: none;
+  }
   .main {
     margin-left: $width;
   }
