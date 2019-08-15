@@ -8,8 +8,12 @@
           <nuxt-link class="link" to="/">自己紹介</nuxt-link>
           <nuxt-link class="link" to="/my-qiita">投稿したQiitaの記事</nuxt-link>
           <nuxt-link class="link" to="/contact">CONTACT</nuxt-link>
-          <div class="link" @click="$refs.canvas.stopCanvas()" v-if="isRunning">STOP CANVAS</div>
-          <div class="link" @click="$refs.canvas.startCanvas()" v-if="!isRunning">RESTART CANVAS</div>
+          <template v-if="isRunning">
+            <div class="link" @click="$refs.canvas.stopCanvas()">STOP CANVAS</div>
+          </template>
+          <template v-else>
+            <div class="link" @click="$refs.canvas.startCanvas()">RESTART CANVAS</div>
+          </template>
         </div>
         <span class="line" />
       </div>
