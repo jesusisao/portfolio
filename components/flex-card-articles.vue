@@ -17,6 +17,9 @@
         v-if="article.table"
         striped
       />
+      <ul v-if="article.list">
+        <li v-for="(li, i) in article.list" :key="i">{{ li }}</li>
+      </ul>
       <img :src="article.imagePath" v-if="article.imagePath" />
     </article>
   </div>
@@ -30,7 +33,14 @@ type CardArticle = {
   title: string;
   icon?: [string, string];
   sentences?: string[];
+  table?: BTable;
+  list?: string[];
   imagePath?: string;
+};
+
+type BTable = {
+  fields: Array<any>;
+  items: Array<any>;
 };
 
 @Component
@@ -92,6 +102,12 @@ export default class FlexCardArticles extends Vue {
     table {
       color: $paragraph-color;
       font-size: 0.8em;
+    }
+    ul {
+      text-align: left;
+      color: $paragraph-color;
+      font-size: 1em;
+      list-style-type: circle;
     }
     img {
       width: 100px;

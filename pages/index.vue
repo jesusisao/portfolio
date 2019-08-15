@@ -28,11 +28,28 @@ export default class AppSelfIntroduce extends Vue {
       title: "Overview",
       icon: ["fas", "user"],
       sentences: [
-        "フロントエンド技術に興味がありますが、仕事ではフロントエンド／バックエンド問わずつらいコードのリファクタリングをよくやっています。リファクタリングも嫌いじゃありません。これまでに最も感銘を受けた技術書もファウラーの『リファクタリング』です。",
+        "4年目エンジニアです。フロントエンド技術に興味がありますが、仕事ではフロントエンド／バックエンド問わずつらいコードのリファクタリングをよくやっています。リファクタリングも嫌いではなく、コードが綺麗になっていく過程に快感を覚えます。これまでに最も感銘を受けた技術書もMartin Fowlerの『リファクタリング』です。",
         "アイコン画像はGetting Over It with Bennett Foddyというゲームの主人公ディオゲネスです。このゲームに一時期ハマっており、200回以上クリアしました。"
       ],
       imagePath: "/img/gettingoverit.jpg"
     },
+    {
+      title: "Details",
+      icon: ["fas", "info-circle"],
+      list: [
+        "テストを意識したコードを書けるエンジニアです。",
+        "循環的複雑度を気にするなど、コードの可読性や品質には細心の注意を払っています。",
+        "インデックスがいつ使われるのか、といったパフォーマンスを意識したクエリを書き、DB設計ができます。",
+        "レイヤが低いプログラミングは未経験です。",
+        "競技プログラミングは未経験です。",
+        "AI・機械学習等は未経験です。",
+        "英語は話せませんが英語のドキュメントを読むことができます。",
+        "非同期処理はPromiseでもasync／awaitでも理解して書くことができます。",
+        "高階関数を理解し、書くことができます。",
+        "クラスベース／プロトタイプベースのオブジェクト指向プログラミングはもちろん、関数パラダイムの言語にもキャッチアップしていく自信があります。"
+      ]
+    },
+
     {
       title: "Programming skills",
       icon: ["fas", "wrench"],
@@ -81,6 +98,10 @@ export default class AppSelfIntroduce extends Vue {
           {
             language: "SCSS",
             experience: "実務半年"
+          },
+          {
+            language: "Haskell",
+            experience: "趣味"
           }
         ]
       }
@@ -90,7 +111,11 @@ export default class AppSelfIntroduce extends Vue {
       icon: ["fas", "wrench"],
       table: {
         fields: [
-          { key: "name", label: "インフラ ／ フレームワーク他", sortable: true },
+          {
+            key: "name",
+            label: "インフラ ／ フレームワーク他",
+            sortable: true
+          },
           { key: "experience", label: "経験", sortable: true }
         ],
         items: [
@@ -99,12 +124,16 @@ export default class AppSelfIntroduce extends Vue {
             experience: "実務1年"
           },
           {
-            name: "Jenkins",
-            experience: "実務半年"
+            name: "Oracle Database",
+            experience: "実務2年"
           },
           {
-            name: "Docker",
-            experience: "趣味"
+            name: "MySQL(Aurora)",
+            experience: "実務1年"
+          },
+          {
+            name: "Jenkins",
+            experience: "実務半年"
           },
           {
             name: "Circle CI",
@@ -134,6 +163,10 @@ export default class AppSelfIntroduce extends Vue {
             name: "Angular",
             experience: "趣味"
           },
+          {
+            name: "Docker",
+            experience: "趣味"
+          }
         ]
       }
     },
@@ -142,14 +175,6 @@ export default class AppSelfIntroduce extends Vue {
       icon: ["fas", "gamepad"],
       sentences: [
         "一時期はDTMをしたり映像を作ったりしていましたが、最近はゲームをします。Apex LegendsをしながらたまにGetting Over Itで山登りをする日々です。"
-      ]
-    },
-    {
-      title: "About page",
-      icon: ["fas", "sitemap"],
-      sentences: [
-        "このサイトは私 @jesus_isao のポートフォリオとして、転職時に人事の査定に関わる方に見てもらうことを想定して作られました。",
-        "Nuxt + TypeScriptで作られています。背景はHTML5のCanvasで描いて動かしています。"
       ]
     }
   ];
