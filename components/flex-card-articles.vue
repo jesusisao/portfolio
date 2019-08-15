@@ -11,6 +11,12 @@
         {{ article.title }}
       </h1>
       <p v-for="(sentence, i) in article.sentences" :key="i">{{ sentence }}</p>
+      <b-table
+        :items="article.table.items"
+        :fields="article.table.fields"
+        v-if="article.table"
+        striped
+      />
       <img :src="article.imagePath" v-if="article.imagePath" />
     </article>
   </div>
@@ -81,6 +87,11 @@ export default class FlexCardArticles extends Vue {
       text-align: left;
       text-indent: 1em;
       color: $paragraph-color;
+      width: 100%;
+    }
+    table {
+      color: $paragraph-color;
+      font-size: 0.8em;
     }
     img {
       width: 100px;

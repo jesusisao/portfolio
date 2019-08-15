@@ -34,8 +34,108 @@ export default class AppSelfIntroduce extends Vue {
       imagePath: "/img/gettingoverit.jpg"
     },
     {
-      title: "Skill",
-      icon: ["fas", "wrench"]
+      title: "Programming skills",
+      icon: ["fas", "wrench"],
+      table: {
+        fields: [
+          { key: "language", label: "言語", sortable: true },
+          { key: "experience", label: "経験", sortable: true }
+        ],
+        items: [
+          {
+            language: "JavaScript (ES6+)",
+            experience: "実務半年"
+          },
+          {
+            language: "JavaScript (ES5)",
+            experience: "趣味"
+          },
+          {
+            language: "VB 2010",
+            experience: "実務2年"
+          },
+          {
+            language: "PL/SQL",
+            experience: "実務2年"
+          },
+          {
+            language: "C#",
+            experience: "実務半年"
+          },
+          {
+            language: "Java",
+            experience: "実務半年"
+          },
+          {
+            language: "Python",
+            experience: "実務1年"
+          },
+          {
+            language: "TypeScript",
+            experience: "趣味"
+          },
+          {
+            language: "HTML5 / CSS3",
+            experience: "実務半年"
+          },
+          {
+            language: "SCSS",
+            experience: "実務半年"
+          }
+        ]
+      }
+    },
+    {
+      title: "Other skills",
+      icon: ["fas", "wrench"],
+      table: {
+        fields: [
+          { key: "name", label: "インフラ ／ フレームワーク他", sortable: true },
+          { key: "experience", label: "経験", sortable: true }
+        ],
+        items: [
+          {
+            name: "AWS",
+            experience: "実務1年"
+          },
+          {
+            name: "Jenkins",
+            experience: "実務半年"
+          },
+          {
+            name: "Docker",
+            experience: "趣味"
+          },
+          {
+            name: "Circle CI",
+            experience: "実務半年"
+          },
+          {
+            name: "Git",
+            experience: "実務1年"
+          },
+          {
+            name: "Subversion",
+            experience: "実務半年"
+          },
+          {
+            name: "Node.js",
+            experience: "趣味"
+          },
+          {
+            name: "Flask",
+            experience: "実務半年"
+          },
+          {
+            name: "Nuxt.js",
+            experience: "実務半年"
+          },
+          {
+            name: "Angular",
+            experience: "趣味"
+          },
+        ]
+      }
     },
     {
       title: "Hobby",
