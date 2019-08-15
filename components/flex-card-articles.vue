@@ -80,6 +80,7 @@ export default class FlexCardArticles extends Vue {
     p {
       text-align: left;
       text-indent: 1em;
+      color: $paragraph-color;
     }
     img {
       width: 100px;

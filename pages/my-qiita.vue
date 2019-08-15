@@ -99,7 +99,10 @@ export default class MyQiita extends Vue {
   flex-direction: column;
   .title {
     color: $header-title-color;
-    text-shadow:0px 0px 7px #242424;
+    text-shadow: 0px 0px 7px #242424;
+  }
+  p {
+    color: $header-title-color;
   }
 }
 
@@ -135,6 +138,7 @@ export default class MyQiita extends Vue {
         }
       }
       p {
+        color: $paragraph-color;
         text-align: left;
         text-indent: 1em;
       }

@@ -39,13 +39,17 @@ export default class AppSelfIntroduce extends Vue {
     },
     {
       title: "Hobby",
-      icon: ["fas", "gamepad"]
+      icon: ["fas", "gamepad"],
+      sentences: [
+        "一時期はDTMをしたり映像を作ったりしていましたが、最近はゲームをします。Apex LegendsをしながらたまにGetting Over Itで山登りをする日々です。"
+      ]
     },
     {
       title: "About page",
       icon: ["fas", "sitemap"],
       sentences: [
-        "このサイトは私 @jesus_isao のポートフォリオとして、転職時に人事の査定に関わる方に見てもらうことを想定して作られました。"
+        "このサイトは私 @jesus_isao のポートフォリオとして、転職時に人事の査定に関わる方に見てもらうことを想定して作られました。",
+        "Nuxt + TypeScriptで作られています。背景はHTML5のCanvasで描いて動かしています。"
       ]
     }
   ];
@@ -60,7 +64,7 @@ export default class AppSelfIntroduce extends Vue {
   flex-direction: column;
   .title {
     color: $header-title-color;
-    text-shadow:0px 0px 7px #242424;
+    text-shadow: 0px 0px 7px #242424;
   }
 }
 </style>
