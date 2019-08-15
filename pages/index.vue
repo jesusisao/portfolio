@@ -68,6 +68,10 @@ export default class AppSelfIntroduce extends Vue {
             experience: "趣味"
           },
           {
+            language: "SQL",
+            experience: "実務3年"
+          },
+          {
             language: "VB 2010",
             experience: "実務2年"
           },
@@ -76,16 +80,16 @@ export default class AppSelfIntroduce extends Vue {
             experience: "実務2年"
           },
           {
+            language: "Python",
+            experience: "実務1年"
+          },
+          {
             language: "C#",
             experience: "実務半年"
           },
           {
             language: "Java",
             experience: "実務半年"
-          },
-          {
-            language: "Python",
-            experience: "実務1年"
           },
           {
             language: "TypeScript",
@@ -108,7 +112,7 @@ export default class AppSelfIntroduce extends Vue {
     },
     {
       title: "Other skills",
-      icon: ["fas", "wrench"],
+      icon: ["fas", "server"],
       table: {
         fields: [
           {
@@ -129,6 +133,10 @@ export default class AppSelfIntroduce extends Vue {
           },
           {
             name: "MySQL(Aurora)",
+            experience: "実務1年"
+          },
+          {
+            name: "Bash / Zsh",
             experience: "実務1年"
           },
           {
@@ -174,7 +182,7 @@ export default class AppSelfIntroduce extends Vue {
       title: "Hobby",
       icon: ["fas", "gamepad"],
       sentences: [
-        "一時期はDTMをしたり映像を作ったりしていましたが、最近はゲームをします。Apex LegendsをしながらたまにGetting Over Itで山登りをする日々です。"
+        "ものを作るのが好きで、一時期はDTMをしたり映像を作ったりしていましたが、最近はゲームをします。Apex LegendsをしながらたまにGetting Over Itで山登りをする日々です。"
       ]
     }
   ];

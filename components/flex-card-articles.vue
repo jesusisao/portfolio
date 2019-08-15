@@ -70,7 +70,7 @@ export default class FlexCardArticles extends Vue {
 
 <style lang="scss" scoped>
 .flex-container {
-  margin: 0 auto;
+  margin-bottom: 100px;
   display: flex;
   flex-flow: wrap;
   max-width: 1000px;

@@ -115,7 +115,7 @@ export default class MyQiita extends Vue {
 }
 
 .flex-container {
-  margin: 0 auto;
+  margin-bottom: 100px;
   display: flex;
   flex-flow: wrap;
   justify-content: center;
