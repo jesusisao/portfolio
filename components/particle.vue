@@ -130,6 +130,11 @@ export default class Particle extends Vue {
     canvasContext.clearRect(0, 0, canvasWidth, canvasHeight);
     requestAnimationFrame(forRecursion);
 
+    for (var i = 0; i < Particle.density; i++) {
+      this.dots[i].update(canvasContext);
+    }
+
+    // 画面縁の影
     canvasContext!.globalAlpha = "1";
     const halfWidth = canvasWidth / 2;
     const halfHeight = canvasHeight / 2;
@@ -141,15 +146,11 @@ export default class Particle extends Vue {
       halfHeight,
       halfWidth
     );
-    radialGradient.addColorStop(0, "rgb(68, 68, 68)");
-    radialGradient.addColorStop(0.9, "rgb(67, 67, 67)");
-    radialGradient.addColorStop(1.0, "rgb(50, 50, 50)");
+    radialGradient.addColorStop(0, "rgba(68, 68, 68, 0)");
+    radialGradient.addColorStop(0.8, "rgba(67, 67, 67, 0)");
+    radialGradient.addColorStop(1.0, "rgba(30, 30, 30, 0.6)");
     canvasContext!.fillStyle = radialGradient;
     canvasContext!.fillRect(-5, -5, canvasWidth + 5, canvasHeight + 5);
-
-    for (var i = 0; i < Particle.density; i++) {
-      this.dots[i].update(canvasContext);
-    }
   }
 }
 </script>
