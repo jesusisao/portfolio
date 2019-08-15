@@ -93,7 +93,7 @@ export default class AppSelfIntroduce extends Vue {
           },
           {
             language: "HTML5 / CSS3",
-            experience: "実務半年"
+            experience: "実務1年"
           },
           {
             language: "SCSS",
