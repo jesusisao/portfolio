@@ -7,13 +7,14 @@
           <nuxt-link class="link" to="/about">About page</nuxt-link>
           <nuxt-link class="link" to="/">自己紹介</nuxt-link>
           <nuxt-link class="link" to="/my-qiita">投稿したQiitaの記事</nuxt-link>
-          <nuxt-link class="link" to="/contact">CONTACT</nuxt-link>
+          <nuxt-link class="link" to="/contact">Contact</nuxt-link>
           <template v-if="isRunning">
-            <div class="link" @click="$refs.canvas.stopCanvas()">STOP CANVAS</div>
+            <div class="link" @click="$refs.canvas.stopCanvas()">Stop Canvas</div>
           </template>
           <template v-else>
-            <div class="link" @click="$refs.canvas.startCanvas()">RESTART CANVAS</div>
+            <div class="link" @click="$refs.canvas.startCanvas()">Restart Canvas</div>
           </template>
+          <div class="link" @click="$refs.canvas.regenerateCanvas()">Regenerate Canvas</div>
         </div>
         <span class="line" />
       </div>

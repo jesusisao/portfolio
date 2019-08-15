@@ -133,6 +133,15 @@ export default class Particle extends Vue {
   }
 
   startCanvas() {
+    this.writeCanvas(false);
+  }
+
+  regenerateCanvas() {
+    this.writeCanvas(true);
+  }
+
+  writeCanvas(doRegenerateDots: boolean) {
+    this.stopCanvas()
     const { canvasWrapper } = this.$refs;
     if (!isElement(canvasWrapper)) return;
     const canvasWidth: number = canvasWrapper.clientWidth;
@@ -142,8 +151,11 @@ export default class Particle extends Vue {
     canvas.setAttribute("height", canvasHeight.toString());
     const canvasContext = canvas.getContext("2d");
 
-    for (var i = 0; i < Particle.density; i++) {
-      this.dots.push(new Dot(canvasWidth, canvasHeight));
+    if (doRegenerateDots || this.dots.length === 0) {
+      this.dots = []
+      for (var i = 0; i < Particle.density; i++) {
+        this.dots.push(new Dot(canvasWidth, canvasHeight));
+      }
     }
     const pid = new Date().getTime();
     this.addRunningIds(pid);

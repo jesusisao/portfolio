@@ -22,7 +22,7 @@ export default class extends Vue {
     };
   }
 
-  public readonly title: string = "CONTACT";
+  public readonly title: string = "Contact";
   public readonly articles = [
     {
       title: "Mail",
