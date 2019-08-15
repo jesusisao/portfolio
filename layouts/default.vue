@@ -1,6 +1,6 @@
 <template>
   <div>
-    <particle class="back-canvas" />
+    <particle class="back-canvas" ref="canvas" />
     <div class="front">
       <div class="side-menu">
         <div class="list">
@@ -8,6 +8,8 @@
           <nuxt-link class="link" to="/">自己紹介</nuxt-link>
           <nuxt-link class="link" to="/my-qiita">投稿したQiitaの記事</nuxt-link>
           <nuxt-link class="link" to="/contact">CONTACT</nuxt-link>
+          <div class="link" @click="$refs.canvas.stopCanvas()" v-if="isRunning">STOP CANVAS</div>
+          <div class="link" @click="$refs.canvas.startCanvas()" v-if="!isRunning">RESTART CANVAS</div>
         </div>
         <span class="line" />
       </div>
@@ -18,10 +20,16 @@
 
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
+import { mapGetters } from "vuex";
 
 @Component({
   components: {
     Particle: () => import("~/components/particle.vue")
+  },
+  computed: {
+    ...mapGetters({
+      isRunning: "particle/isRunning"
+    })
   }
 })
 export default class extends Vue {}

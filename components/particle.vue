@@ -6,6 +6,7 @@
 
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
+import { mapGetters, mapMutations } from "vuex";
 
 type Position = {
   x: number;
@@ -101,14 +102,37 @@ class Dot {
   }
 }
 
+// ------------------------------------------------------------
+
 const isElement = (x: any): x is Element => x instanceof Element;
 
-@Component
+@Component({
+  computed: {
+    ...mapGetters({
+      shouldProcessBeStopped: "particle/shouldProcessBeStopped",
+      isRunning: "particle/isRunning"
+    })
+  },
+  methods: {
+    ...mapMutations({
+      addRunningIds: "particle/addRunningIds",
+      moveRunningIdsToStopIds: "particle/moveRunningIdsToStopIds"
+    })
+  }
+})
 export default class Particle extends Vue {
   private static density: number = 15;
   private dots: Array<Dot> = [];
+  public isRunning: any;
+  public shouldProcessBeStopped: any;
+  public addRunningIds: any;
+  public moveRunningIdsToStopIds: any;
 
   mounted() {
+    this.startCanvas();
+  }
+
+  startCanvas() {
     const { canvasWrapper } = this.$refs;
     if (!isElement(canvasWrapper)) return;
     const canvasWidth: number = canvasWrapper.clientWidth;
@@ -121,14 +145,23 @@ export default class Particle extends Vue {
     for (var i = 0; i < Particle.density; i++) {
       this.dots.push(new Dot(canvasWidth, canvasHeight));
     }
-    this.updateCanvas(canvasContext, canvasWidth, canvasHeight);
+    const pid = new Date().getTime();
+    this.addRunningIds(pid);
+    this.updateCanvas(canvasContext, canvasWidth, canvasHeight, pid);
   }
 
-  updateCanvas(canvasContext: any, canvasWidth: number, canvasHeight: number) {
+  updateCanvas(
+    canvasContext: any,
+    canvasWidth: number,
+    canvasHeight: number,
+    pid: number
+  ) {
+    if (this.shouldProcessBeStopped(pid)) return;
+
     const forRecursion = () =>
-      this.updateCanvas(canvasContext, canvasWidth, canvasHeight);
+      this.updateCanvas(canvasContext, canvasWidth, canvasHeight, pid);
     canvasContext.clearRect(0, 0, canvasWidth, canvasHeight);
-    const pid = requestAnimationFrame(forRecursion);
+    requestAnimationFrame(forRecursion);
 
     for (var i = 0; i < Particle.density; i++) {
       this.dots[i].update(canvasContext);
@@ -151,6 +184,12 @@ export default class Particle extends Vue {
     radialGradient.addColorStop(1.0, "rgba(30, 30, 30, 0.6)");
     canvasContext!.fillStyle = radialGradient;
     canvasContext!.fillRect(-5, -5, canvasWidth + 5, canvasHeight + 5);
+  }
+
+  stopCanvas() {
+    console.log(this.isRunning);
+    if (!this.isRunning) return;
+    this.moveRunningIdsToStopIds();
   }
 }
 </script>

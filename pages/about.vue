@@ -30,7 +30,7 @@ export default class extends Vue {
       sentences: [
         "このサイトは私 @jesus_isao のポートフォリオとして、転職時に採用に関わる方に見てもらうことを想定して作られました。",
         "Nuxt.js + TypeScriptで作られています。背景はHTML5のCanvasで描いて動かしています。",
-        "被写界深度のようなものを実現したかったがためにCanvasRenderingContext2D.filterのblurを各Particleに使っていますが、そのせいで処理は結構重めです。すみません。"
+        "被写界深度のようなものを実現したかったがためにCanvasRenderingContext2D.filterのblurを各Particleに使っていますが、そのせいで処理は結構重めです。STOPできるようにしています。"
       ]
     }
   ];
