@@ -10,9 +10,9 @@ export class Particle {
   private canvasHeight: number;
 
   private particleRadius: number;
-  private blur: number;
+  private blur: number;  // 数字が大きいほどはっきりしてる
   private alpha: number;
-  private color: string;
+  private rgb: [number, number, number];
 
   private nowPosition: Coordinate;
   private vector: Coordinate;
@@ -23,7 +23,7 @@ export class Particle {
     particleRadius: number,
     blur: number,
     alpha: number,
-    color: string,
+    rgb: [number, number, number],
     nowPosition: Coordinate,
     vector: Coordinate
   ) {
@@ -33,7 +33,7 @@ export class Particle {
     this.particleRadius = particleRadius;
     this.blur = blur;
     this.alpha = alpha;
-    this.color = color;
+    this.rgb = rgb;
 
     this.nowPosition = nowPosition;
     this.vector = vector;
@@ -46,9 +46,9 @@ export class Particle {
     const randomDepth = abnormalRandom();
 
     const particleRadius = Math.floor(randomRange(5, 120, randomDepth));
-    const blur = randomRange(1, 18, randomDepth);
+    const blur = randomRange(0.7, 0.9, 1 - randomDepth);
     const alpha = 1 - randomDepth + 0.5;
-    const color = Particle.calcColor(randomDepth);
+    const rgb = Particle.calcRgb(randomDepth);
 
     const nowPosition: Coordinate = {
       // 位置
@@ -63,7 +63,7 @@ export class Particle {
       particleRadius,
       blur,
       alpha,
-      color,
+      rgb,
       nowPosition,
       vector
     );
@@ -74,9 +74,9 @@ export class Particle {
     canvasHeight: number
   ): Particle => {
     const particleRadius = randomRange(2, 6);
-    const blur = 0;
+    const blur = 1;
     const alpha = Math.random() * 1;
-    const color = "rgb(255, 246, 201)";
+    const rgb: [number, number, number] = [255, 246, 201];
 
     const nowPosition: Coordinate = {
       // 位置
@@ -93,7 +93,7 @@ export class Particle {
       particleRadius,
       blur,
       alpha,
-      color,
+      rgb,
       nowPosition,
       vector
     );
@@ -101,7 +101,7 @@ export class Particle {
 
   private static generateNewVector = (randomDepth: number) => {
     const angle = Math.random() * 360;
-    const speed = (1 - randomDepth) * 0.8;
+    const speed = (1 - randomDepth) * 0.6;
     return Particle.calcVector(angle, speed);
   };
 
@@ -133,33 +133,34 @@ export class Particle {
     return newY;
   };
 
-  private static calcColor = (randomDepth: number) => {
+  private static calcRgb = (randomDepth: number): [number, number, number] => {
     const rgb = [196, 189, 155];
     // randomDepthによって明度を変える
     const r = Math.floor(randomRange(-50, 50, 1 - randomDepth));
     const [afterR, afterG, afterB] = rgb.map(num => num + r);
-    return `rgb(${afterR}, ${afterG}, ${afterB})`;
+    return [afterR, afterG, afterB];
   };
+
+  private createRgbStr = (): string => {
+    return `${this.rgb[0]}, ${this.rgb[1]}, ${this.rgb[2]}`
+  }
 
   public draw = (ctx: CanvasRenderingContext2D) => {
     ctx.globalAlpha = this.alpha;
-    if (this.blur > 0) {
-      ctx.filter = `blur(${this.blur}px)`;
-    } else {
-      ctx.filter = "none";
-    }
-
-    ctx.fillStyle = this.color;
-    ctx.beginPath();
-    ctx.arc(
+    const radgrad = ctx.createRadialGradient(
       this.nowPosition.x,
       this.nowPosition.y,
-      this.particleRadius,
       0,
-      2 * Math.PI,
-      false
+      this.nowPosition.x,
+      this.nowPosition.y,
+      this.particleRadius
     );
-    ctx.fill();
+    radgrad.addColorStop(0, `rgba(${this.createRgbStr()}, 1)`);
+    radgrad.addColorStop(this.blur, `rgba(${this.createRgbStr()}, ${this.blur})`);
+    radgrad.addColorStop(1, `rgba(${this.createRgbStr()}, 0)`);
+    // draw shape
+    ctx.fillStyle = radgrad;
+    ctx.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
   };
 
   public drawAndUpdatePosition = (ctx: CanvasRenderingContext2D) => {
