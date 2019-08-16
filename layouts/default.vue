@@ -4,6 +4,7 @@
     <div class="front">
       <div class="side-menu">
         <div class="list">
+          <nuxt-link class="link" to="/login">login</nuxt-link>
           <nuxt-link class="link" to="/about">About page</nuxt-link>
           <nuxt-link class="link" to="/">自己紹介</nuxt-link>
           <nuxt-link class="link" to="/my-qiita">投稿したQiitaの記事</nuxt-link>
@@ -85,7 +86,7 @@ $title-color: #8b8200;
   position: fixed;
   bottom: 50px;
   width: $width;
-  height: 200px;
+  height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -124,7 +125,7 @@ $title-color: #8b8200;
       rgba(200, 200, 200, 1) 75%,
       rgba(200, 200, 200, 0) 100%
     );
-    height: 220px;
+    height: 300px;
     width: 2px;
     z-index: -1;
   }

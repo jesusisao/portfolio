@@ -11,7 +11,7 @@
       >こちら</a>です。
     </p>
 
-    <div class="flex-container" ref="articlesWrapper">
+    <div class="flex-container">
       <div
         class="contents"
         v-for="(article, index) in articles"

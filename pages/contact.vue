@@ -1,9 +1,7 @@
 <template>
   <div class="wrapper">
-    <h1 class="title" ref="title">{{ title }}</h1>
-    <div ref="articlesWrapper">
-      <flex-card-articles :articles="articles" />
-    </div>
+    <h1 class="title">{{ title }}</h1>
+    <flex-card-articles :articles="articles" />
   </div>
 </template>
 
