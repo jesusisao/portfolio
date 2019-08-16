@@ -111,8 +111,8 @@ export default class ParticleCanvas extends Vue {
     radialGradient.addColorStop(0, "rgba(30, 30, 30, 0)");
     radialGradient.addColorStop(0.8, "rgba(31, 31, 31, 0)");
     radialGradient.addColorStop(1.0, "rgba(0, 0, 0, 0.6)");
-    canvasContext!.fillStyle = radialGradient;
-    canvasContext!.fillRect(-5, -5, canvasWidth + 5, canvasHeight + 5);
+    canvasContext.fillStyle = radialGradient;
+    canvasContext.fillRect(-5, -5, canvasWidth + 5, canvasHeight + 5);
   }
 
   stopCanvas() {

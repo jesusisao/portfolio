@@ -4,7 +4,7 @@
     <div class="front">
       <div class="side-menu">
         <div class="list">
-          <nuxt-link class="link" to="/login">login</nuxt-link>
+          <nuxt-link class="link" to="/login">Login</nuxt-link>
           <nuxt-link class="link" to="/about">About page</nuxt-link>
           <nuxt-link class="link" to="/">自己紹介</nuxt-link>
           <nuxt-link class="link" to="/my-qiita">投稿したQiitaの記事</nuxt-link>
