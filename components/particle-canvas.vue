@@ -67,11 +67,11 @@ export default class ParticleCanvas extends Vue {
     }
     const pid = new Date().getTime();
     this.addRunningIds(pid);
-    this.updateCanvas(canvasContext, canvasWidth, canvasHeight, pid);
+    this.updateCanvas(canvasContext!, canvasWidth, canvasHeight, pid);
   }
 
   updateCanvas(
-    canvasContext: any,
+    canvasContext: CanvasRenderingContext2D,
     canvasWidth: number,
     canvasHeight: number,
     pid: number
@@ -88,7 +88,7 @@ export default class ParticleCanvas extends Vue {
     }
 
     // 画面縁の影
-    canvasContext!.globalAlpha = "1";
+    canvasContext.globalAlpha = 1;
     const halfWidth = canvasWidth / 2;
     const halfHeight = canvasHeight / 2;
     const radialGradient = canvasContext.createRadialGradient(
