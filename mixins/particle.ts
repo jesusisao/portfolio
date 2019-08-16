@@ -1,4 +1,4 @@
-import { randomRange, abnormalRandom } from "./random";
+import { randomRange } from "./random";
 
 type Coordinate = {
   x: number;
@@ -43,7 +43,7 @@ export class Particle {
     canvasWidth: number,
     canvasHeight: number
   ): Particle => {
-    const randomDepth = abnormalRandom();
+    const randomDepth = Math.random();
 
     const particleRadius = Math.floor(randomRange(5, 120, randomDepth));
     const blur = randomRange(0.7, 0.9, 1 - randomDepth);
@@ -101,7 +101,7 @@ export class Particle {
 
   private static generateNewVector = (randomDepth: number) => {
     const angle = Math.random() * 360;
-    const speed = (1 - randomDepth) * 0.6;
+    const speed = (1 - randomDepth) * 0.4;
     return Particle.calcVector(angle, speed);
   };
 
