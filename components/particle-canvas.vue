@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper" ref="canvasWrapper">
-    <canvas id="canvas" ref="canvas"></canvas>
+    <canvas id="canvas"></canvas>
   </div>
 </template>
 
