@@ -1,14 +1,8 @@
+import { randomRange, abnormalRandom } from "./random";
+
 type Coordinate = {
   x: number;
   y: number;
-};
-
-const calcAbnormalRandom: () => number = () => {
-  const normalR = Math.random();
-  if (normalR > 0.7 || normalR < 0.3) {
-    return normalR;
-  }
-  return calcAbnormalRandom();
 };
 
 export class Particle {
@@ -49,10 +43,10 @@ export class Particle {
     canvasWidth: number,
     canvasHeight: number
   ): Particle => {
-    const randomDepth = calcAbnormalRandom();
+    const randomDepth = abnormalRandom();
 
-    const particleRadius = Math.floor(randomDepth * 115) + 5;
-    const blur = Particle.calcBlurPx(randomDepth);
+    const particleRadius = Math.floor(randomRange(5, 120, randomDepth));
+    const blur = randomRange(1, 18, randomDepth);
     const alpha = 1 - randomDepth + 0.5;
     const color = Particle.calcColor(randomDepth);
 
@@ -79,7 +73,7 @@ export class Particle {
     canvasWidth: number,
     canvasHeight: number
   ): Particle => {
-    const particleRadius = 3 + Math.random() * 3;
+    const particleRadius = randomRange(2, 6);
     const blur = 0;
     const alpha = Math.random() * 1;
     const color = "rgb(255, 246, 201)";
@@ -89,8 +83,8 @@ export class Particle {
       x: Math.random() * canvasWidth,
       y: Math.random() * canvasHeight
     };
-    const angle = Math.random() * (285 - 255) + 255;
-    const speed = 0.2 + Math.random() * 1;
+    const angle = randomRange(255, 285);
+    const speed = randomRange(0.2, 1.2);
     const vector: Coordinate = Particle.calcVector(angle, speed);
 
     return new Particle(
@@ -120,12 +114,6 @@ export class Particle {
     };
   };
 
-  private static calcBlurPx = (randomDepth: number): number => {
-    if (randomDepth < 0.5) return 2;
-    if (randomDepth >= 0.8) return 15;
-    return randomDepth * 15;
-  };
-
   private updatePosition = () => {
     this.nowPosition.x = this.calcNewXPosition();
     this.nowPosition.y = this.calcNewYPosition();
@@ -146,13 +134,10 @@ export class Particle {
   };
 
   private static calcColor = (randomDepth: number) => {
-    const originR = 196;
-    const originG = 189;
-    const originB = 155;
-    const r = (1 - randomDepth - 0.5) * 100;
-    const afterR = originR + r;
-    const afterG = originG + r;
-    const afterB = originB + r;
+    const rgb = [196, 189, 155];
+    // randomDepthによって明度を変える
+    const r = Math.floor(randomRange(-50, 50, 1 - randomDepth));
+    const [afterR, afterG, afterB] = rgb.map(num => num + r);
     return `rgb(${afterR}, ${afterG}, ${afterB})`;
   };
 
