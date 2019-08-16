@@ -26,7 +26,7 @@ const isElement = (x: any): x is Element => x instanceof Element;
   }
 })
 export default class ParticleCanvas extends Vue {
-  private static density: number = 15;
+  private static density: number = 8;
   private dots: Array<Particle> = [];
   public isRunning: any;
   public shouldProcessBeStopped: any;
@@ -59,7 +59,10 @@ export default class ParticleCanvas extends Vue {
     if (doRegenerateDots || this.dots.length === 0) {
       this.dots = []
       for (var i = 0; i < ParticleCanvas.density; i++) {
-        this.dots.push(new Particle(canvasWidth, canvasHeight));
+        this.dots.push(Particle.buildDeepParticle(canvasWidth, canvasHeight));
+      }
+      for (var i = 0; i < 50; i++) {
+        this.dots.push(Particle.buildSmallParticle(canvasWidth, canvasHeight));
       }
     }
     const pid = new Date().getTime();
@@ -80,7 +83,7 @@ export default class ParticleCanvas extends Vue {
     canvasContext.clearRect(0, 0, canvasWidth, canvasHeight);
     requestAnimationFrame(forRecursion);
 
-    for (var i = 0; i < ParticleCanvas.density; i++) {
+    for (var i = 0; i < this.dots.length; i++) {
       this.dots[i].drawAndUpdatePosition(canvasContext);
     }
 
@@ -121,7 +124,7 @@ export default class ParticleCanvas extends Vue {
   height: 100vh;
   overflow: hidden;
   position: relative;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(31, 31, 31);
   canvas {
     background-color: rgb(31, 31, 31);
   }
