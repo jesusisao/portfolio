@@ -7,9 +7,25 @@
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
 import { mapGetters, mapMutations } from "vuex";
-import { Particle } from '~/mixins/particle'
+import { Particle } from "~/mixins/particle";
 
 const isElement = (x: any): x is Element => x instanceof Element;
+
+const generateParticles = (
+  canvasWidth: number,
+  canvasHeight: number
+): Array<Particle> => {
+  const deepParticleDensity = 8;
+  const smallParticleDensity = 50;
+  const particles = [];
+  for (let i = 0; i < deepParticleDensity; i++) {
+    particles.push(Particle.buildDeepParticle(canvasWidth, canvasHeight));
+  }
+  for (let i = 0; i < smallParticleDensity; i++) {
+    particles.push(Particle.buildSmallParticle(canvasWidth, canvasHeight));
+  }
+  return particles;
+};
 
 @Component({
   computed: {
@@ -26,7 +42,6 @@ const isElement = (x: any): x is Element => x instanceof Element;
   }
 })
 export default class ParticleCanvas extends Vue {
-  private static density: number = 8;
   private dots: Array<Particle> = [];
   public isRunning: any;
   public shouldProcessBeStopped: any;
@@ -46,7 +61,7 @@ export default class ParticleCanvas extends Vue {
   }
 
   writeCanvas(doRegenerateDots: boolean) {
-    this.stopCanvas()
+    this.stopCanvas();
     const { canvasWrapper } = this.$refs;
     if (!isElement(canvasWrapper)) return;
     const canvasWidth: number = canvasWrapper.clientWidth;
@@ -54,20 +69,14 @@ export default class ParticleCanvas extends Vue {
     const canvas = <HTMLCanvasElement>document.getElementById("canvas")!;
     canvas.setAttribute("width", canvasWidth.toString());
     canvas.setAttribute("height", canvasHeight.toString());
-    const canvasContext = canvas.getContext("2d");
+    const canvasContext: CanvasRenderingContext2D = canvas.getContext("2d")!;
 
     if (doRegenerateDots || this.dots.length === 0) {
-      this.dots = []
-      for (var i = 0; i < ParticleCanvas.density; i++) {
-        this.dots.push(Particle.buildDeepParticle(canvasWidth, canvasHeight));
-      }
-      for (var i = 0; i < 50; i++) {
-        this.dots.push(Particle.buildSmallParticle(canvasWidth, canvasHeight));
-      }
+      this.dots = generateParticles(canvasWidth, canvasHeight)
     }
     const pid = new Date().getTime();
     this.addRunningIds(pid);
-    this.updateCanvas(canvasContext!, canvasWidth, canvasHeight, pid);
+    this.updateCanvas(canvasContext, canvasWidth, canvasHeight, pid);
   }
 
   updateCanvas(
@@ -83,7 +92,7 @@ export default class ParticleCanvas extends Vue {
     canvasContext.clearRect(0, 0, canvasWidth, canvasHeight);
     requestAnimationFrame(forRecursion);
 
-    for (var i = 0; i < this.dots.length; i++) {
+    for (let i = 0; i < this.dots.length; i++) {
       this.dots[i].drawAndUpdatePosition(canvasContext);
     }
 
