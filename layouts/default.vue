@@ -29,7 +29,7 @@ import { mapGetters } from "vuex";
 
 @Component({
   components: {
-    Particle: () => import("~/components/particle.vue")
+    Particle: () => import("~/components/particle-canvas.vue")
   },
   computed: {
     ...mapGetters({
