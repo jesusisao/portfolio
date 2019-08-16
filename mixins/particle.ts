@@ -1,5 +1,3 @@
-// だいぶ変わったけど改造元：https://www.webopixel.net/javascript/1271.html
-
 type Coordinate = {
   x: number;
   y: number;
