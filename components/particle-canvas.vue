@@ -15,8 +15,8 @@ const generateParticles = (
   canvasWidth: number,
   canvasHeight: number
 ): Array<Particle> => {
-  const deepParticleDensity = 30;
-  const smallParticleDensity = 100;
+  const deepParticleDensity = 20;
+  const smallParticleDensity = 80;
   const particles = [];
   for (let i = 0; i < deepParticleDensity; i = (i + 1) | 0) {
     particles.push(Particle.buildDeepParticle(canvasWidth, canvasHeight));
