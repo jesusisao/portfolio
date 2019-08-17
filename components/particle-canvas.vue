@@ -116,7 +116,6 @@ export default class ParticleCanvas extends Vue {
   }
 
   stopCanvas() {
-    console.log(this.isRunning);
     if (!this.isRunning) return;
     this.moveRunningIdsToStopIds();
   }

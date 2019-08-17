@@ -5,17 +5,17 @@
     <div class="contents container" ref="loginBox">
       <div class="row">
         <label for="id" class="col-4 col-xs-12">ID</label>
-        <input type="text" name="id" id="id" class="col-6 col-xs-12" />
+        <input type="text" name="id" v-model="id" class="col-6 col-xs-12" />
         <div class="col-2 col-xs-0" />
       </div>
       <div class="row">
         <label for="password" class="col-4">パスワード</label>
-        <input type="password" name="password" id="password" class="col-6" />
+        <input type="password" name="password" v-model="password" class="col-6" />
         <div class="col-2" />
       </div>
       <div class="row">
         <div class="col-4" />
-        <button class="col-4">ログイン</button>
+        <button class="col-4" @click="login">ログイン</button>
         <div class="col-4" />
       </div>
     </div>
@@ -25,6 +25,7 @@
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
 import { TweenMax, Expo } from "gsap";
+import axios from "axios";
 
 @Component
 export default class extends Vue {
@@ -35,6 +36,8 @@ export default class extends Vue {
   }
 
   public readonly title: string = "Login";
+  private id: string = "";
+  private password: string = "";
 
   mounted() {
     TweenMax.fromTo(
@@ -50,6 +53,22 @@ export default class extends Vue {
         yPercent: 0
       }
     );
+  }
+
+  async login() {
+    const param = {
+      id: this.id,
+      password: this.password
+    };
+    console.log(param);
+    return await axios
+      .post("/api/auth/login", param)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
 }
 </script>
