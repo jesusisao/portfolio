@@ -136,7 +136,7 @@ export class Particle {
   private static calcRgb = (randomDepth: number): [number, number, number] => {
     const rgb = [196, 189, 155];
     // randomDepthによって明度を変える
-    const r = Math.floor(randomRange(-50, 50, 1 - randomDepth));
+    const r = Math.floor(randomRange(-70, 50, 1 - randomDepth));
     const [afterR, afterG, afterB] = rgb.map(num => num + r);
     return [afterR, afterG, afterB];
   };

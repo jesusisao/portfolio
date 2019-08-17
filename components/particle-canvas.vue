@@ -100,13 +100,19 @@ export default class ParticleCanvas extends Vue {
     canvasContext.globalAlpha = 1;
     const halfWidth = canvasWidth / 2;
     const halfHeight = canvasHeight / 2;
+
+    let shadowRadius = halfWidth + 50;
+    if (halfHeight > halfWidth) {
+      shadowRadius = halfHeight + 50;
+    }
+
     const radialGradient = canvasContext.createRadialGradient(
       halfWidth,
       halfHeight,
       0,
       halfWidth,
       halfHeight,
-      halfWidth
+      shadowRadius
     );
     radialGradient.addColorStop(0, "rgba(30, 30, 30, 0)");
     radialGradient.addColorStop(0.8, "rgba(31, 31, 31, 0)");
