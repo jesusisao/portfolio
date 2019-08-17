@@ -6,10 +6,10 @@
         <p class="login-info-li">ログイン中</p>
         <p class="login-info-li" v-if="displayName">{{ displayName }}</p>
         <p class="login-info-li">{{ email }}</p>
-        <p class="login-info-li link" @click="logout">Logout</p>
+        <p class="login-info-li button" @click="logout">Logout</p>
       </div>
       <div class="login-info" v-else>
-        <nuxt-link class="login-info-li link" to="/login">Login</nuxt-link>
+        <nuxt-link class="login-info-li button" to="/login">Login</nuxt-link>
       </div>
       <div class="side-menu">
         <div class="list">
@@ -125,19 +125,21 @@ $title-color: #8b8200;
   }
 }
 
-.link {
+.button {
   display: block;
+  width: 80px;
   color: rgb(163, 163, 163);
+  text-align: center;
+  border-radius: 5px;
+  background-color: rgb(56, 54, 37);
   text-decoration: none;
-  text-shadow: 0px 0px 7px #242424;
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
-  z-index: 10;
   & + .link {
     margin-top: 10px;
   }
   &:hover {
-    color: $title-color;
+    background-color: $title-color;
   }
 }
 
@@ -156,6 +158,21 @@ $title-color: #8b8200;
     text-align: left;
     vertical-align: middle;
     font-size: 0.8em;
+    .link {
+      display: block;
+      color: rgb(163, 163, 163);
+      text-decoration: none;
+      text-shadow: 0px 0px 7px #242424;
+      transition-duration: 0.2s;
+      transition-timing-function: ease-in-out;
+      z-index: 10;
+      & + .link {
+        margin-top: 10px;
+      }
+      &:hover {
+        color: $title-color;
+      }
+    }
   }
   .line {
     display: inline-block;
