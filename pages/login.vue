@@ -4,8 +4,8 @@
     <p>ログインすると、@jesus_isaoの本名や職務経歴にアクセスすることができるようになります。</p>
     <div class="contents container" ref="loginBox">
       <div class="row">
-        <label for="id" class="col-4 col-xs-12">ID</label>
-        <input type="text" name="id" v-model="id" class="col-6 col-xs-12" />
+        <label for="email" class="col-4 col-xs-12">メール</label>
+        <input type="text" name="email" v-model="email" class="col-6 col-xs-12" />
         <div class="col-2 col-xs-0" />
       </div>
       <div class="row">
@@ -25,7 +25,7 @@
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
 import { TweenMax, Expo } from "gsap";
-import axios from "axios";
+import firebase from "~/mixins/myFirebase";
 
 @Component
 export default class extends Vue {
@@ -36,7 +36,7 @@ export default class extends Vue {
   }
 
   public readonly title: string = "Login";
-  private id: string = "";
+  private email: string = "";
   private password: string = "";
 
   mounted() {
@@ -56,19 +56,13 @@ export default class extends Vue {
   }
 
   async login() {
-    const param = {
-      id: this.id,
-      password: this.password
-    };
-    console.log(param);
-    return await axios
-      .post("/api/auth/login", param)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(error => {
-        console.error(error);
+    const result = await firebase
+      .auth()
+      .signInWithEmailAndPassword(this.email, this.password)
+      .catch(function(error) {
+        console.warn(error)
       });
+    console.log(result)
   }
 }
 </script>
