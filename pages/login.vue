@@ -18,6 +18,16 @@
         <button class="col-4" @click="login">ログイン</button>
         <div class="col-4" />
       </div>
+      <div class="row">
+        <div class="col-4" />
+        <button class="col-4" @click="logout">ログアウト</button>
+        <div class="col-4" />
+      </div>
+      <div class="row">
+        <div class="col-4" />
+        <button class="col-4" @click="testPost">テスト</button>
+        <div class="col-4" />
+      </div>
     </div>
   </div>
 </template>
@@ -25,6 +35,7 @@
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
 import { TweenMax, Expo } from "gsap";
+import axios from "axios";
 import firebase from "~/mixins/myFirebase";
 
 @Component
@@ -56,13 +67,39 @@ export default class extends Vue {
   }
 
   async login() {
-    const result = await firebase
-      .auth()
-      .signInWithEmailAndPassword(this.email, this.password)
-      .catch(function(error) {
-        console.warn(error)
-      });
-    console.log(result)
+    try {
+      const result = await firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password);
+      console.log(result);
+    } catch (e) {
+      console.warn(e);
+    }
+  }
+
+  async logout() {
+    try {
+      await firebase.auth().signOut();
+      console.info("ログアウトしました。");
+    } catch (e) {
+      console.warn(e);
+    }
+  }
+
+  async testPost() {
+    try {
+      const currentUser = await firebase.auth().currentUser;
+      if (currentUser === null) {
+        console.info("ログインしていません。");
+        return;
+      }
+      const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
+      console.log(idToken);
+      const result = await axios.post("/api/auth/test", { idToken: idToken });
+      console.log(result)
+    } catch (e) {
+      console.warn(e);
+    }
   }
 }
 </script>
@@ -92,7 +129,7 @@ export default class extends Vue {
   background-color: $background-color;
   box-shadow: 0px 0px 50px -15px #1a1a1a;
   width: 500px;
-  min-height: 200px;
+  min-height: 300px;
   .row {
     label {
       text-align: left;
