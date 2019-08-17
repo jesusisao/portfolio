@@ -2,9 +2,17 @@
   <div>
     <particle class="back-canvas" ref="canvas" />
     <div class="front">
+      <div class="login-info" v-if="isLoggingIn">
+        <p class="login-info-li">ログイン中</p>
+        <p class="login-info-li" v-if="displayName">{{ displayName }}</p>
+        <p class="login-info-li">{{ email }}</p>
+        <p class="login-info-li link" @click="logout">Logout</p>
+      </div>
+      <div class="login-info" v-else>
+        <nuxt-link class="login-info-li link" to="/login">Login</nuxt-link>
+      </div>
       <div class="side-menu">
         <div class="list">
-          <nuxt-link class="link" to="/login">Login</nuxt-link>
           <nuxt-link class="link" to="/about">About page</nuxt-link>
           <nuxt-link class="link" to="/">自己紹介</nuxt-link>
           <nuxt-link class="link" to="/my-qiita">投稿したQiitaの記事</nuxt-link>
@@ -26,7 +34,8 @@
 
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
-import { mapGetters } from "vuex";
+import { mapGetters, mapState, mapMutations } from "vuex";
+import firebase from "~/mixins/myFirebase";
 
 @Component({
   components: {
@@ -34,11 +43,30 @@ import { mapGetters } from "vuex";
   },
   computed: {
     ...mapGetters({
-      isRunning: "particle/isRunning"
+      isRunning: "particle/isRunning",
+      isLoggingIn: "isLoggingIn"
+    }),
+    ...mapState(["displayName", "email"])
+  },
+  methods: {
+    ...mapMutations({
+      storeLogout: "logout"
     })
   }
 })
-export default class extends Vue {}
+export default class extends Vue {
+  private storeLogout: any;
+
+  async logout() {
+    try {
+      await firebase.auth().signOut();
+      this.storeLogout();
+      console.info("ログアウトしました。");
+    } catch (e) {
+      console.warn(e);
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -82,6 +110,37 @@ $title-color: #8b8200;
   }
 }
 
+.login-info {
+  position: fixed;
+  display: block;
+  top: 10px;
+  margin: 0 0 0 20px;
+  .login-info-li {
+    font-size: 0.8em;
+    color: rgb(163, 163, 163);
+    margin: 0;
+    & + .login-info-li {
+      margin-top: 10px;
+    }
+  }
+}
+
+.link {
+  display: block;
+  color: rgb(163, 163, 163);
+  text-decoration: none;
+  text-shadow: 0px 0px 7px #242424;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  z-index: 10;
+  & + .link {
+    margin-top: 10px;
+  }
+  &:hover {
+    color: $title-color;
+  }
+}
+
 .side-menu {
   position: fixed;
   bottom: 50px;
@@ -97,21 +156,6 @@ $title-color: #8b8200;
     text-align: left;
     vertical-align: middle;
     font-size: 0.8em;
-    .link {
-      display: block;
-      color: rgb(163, 163, 163);
-      text-decoration: none;
-      text-shadow: 0px 0px 7px #242424;
-      transition-duration: 0.2s;
-      transition-timing-function: ease-in-out;
-      z-index: 10;
-      & + .link {
-        margin-top: 10px;
-      }
-      &:hover {
-        color: $title-color;
-      }
-    }
   }
   .line {
     display: inline-block;

@@ -20,11 +20,6 @@
       </div>
       <div class="row">
         <div class="col-4" />
-        <button class="col-4" @click="logout">ログアウト</button>
-        <div class="col-4" />
-      </div>
-      <div class="row">
-        <div class="col-4" />
         <button class="col-4" @click="testPost">テスト</button>
         <div class="col-4" />
       </div>
@@ -35,10 +30,18 @@
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
 import { TweenMax, Expo } from "gsap";
+import { mapMutations } from "vuex";
 import axios from "axios";
 import firebase from "~/mixins/myFirebase";
 
-@Component
+@Component({
+  methods: {
+    ...mapMutations({
+      storeLogin: "login",
+      storeLogout: "logout"
+    })
+  }
+})
 export default class extends Vue {
   head() {
     return {
@@ -49,6 +52,7 @@ export default class extends Vue {
   public readonly title: string = "Login";
   private email: string = "";
   private password: string = "";
+  private storeLogin: any;
 
   mounted() {
     TweenMax.fromTo(
@@ -71,16 +75,10 @@ export default class extends Vue {
       const result = await firebase
         .auth()
         .signInWithEmailAndPassword(this.email, this.password);
-      console.log(result);
-    } catch (e) {
-      console.warn(e);
-    }
-  }
 
-  async logout() {
-    try {
-      await firebase.auth().signOut();
-      console.info("ログアウトしました。");
+      this.storeLogin(result);
+      console.log(result);
+      this.$router.push("/")
     } catch (e) {
       console.warn(e);
     }
@@ -96,7 +94,7 @@ export default class extends Vue {
       const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
       console.log(idToken);
       const result = await axios.post("/api/auth/test", { idToken: idToken });
-      console.log(result)
+      console.log(result);
     } catch (e) {
       console.warn(e);
     }

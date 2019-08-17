@@ -32,6 +32,7 @@ const nuxtConfig: NuxtConfiguration = {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~/plugins/cookieStorage.js',
   ],
   /*
   ** Nuxt.js dev-modules
