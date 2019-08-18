@@ -1,2 +1,6 @@
 # Secret key for Firebase Admin
 portfolio*.json
+
+# Secret Contents
+profile.json
+career.json

@@ -1,4 +1,4 @@
-import * as firebase from 'firebase/app';
+import * as firebase from "firebase/app";
 import "firebase/auth";
 
 const firebaseConfig = {
@@ -14,5 +14,13 @@ const firebaseConfig = {
 if (firebase.apps.length === 0) {
   firebase.initializeApp(firebaseConfig);
 }
+
+export const getIdToken = async () => {
+  const currentUser = await firebase.auth().currentUser;
+  if (currentUser === null) {
+    throw Error("ログインしていません。")
+  }
+  return await currentUser.getIdToken(/* forceRefresh */ true);
+};
 
 export default firebase;

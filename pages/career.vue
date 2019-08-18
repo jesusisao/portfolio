@@ -8,6 +8,8 @@
 
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
+import axios from "axios";
+import { getIdToken } from "~/mixins/myFirebase";
 
 @Component({
   components: {
@@ -22,13 +24,29 @@ export default class extends Vue {
   }
 
   public readonly title: string = "Career";
-  public readonly articles = [
-    {
-      title: "Career",
-      icon: ["fas", "briefcase"],
-      sentences: [""]
+  public articles = [];
+
+  async mounted() {
+    await this.fetchArticles();
+  }
+
+  async fetchArticles() {
+    try {
+      const idToken = await getIdToken();
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `JWT ${idToken}`
+        }
+      };
+      const result = await axios.post("/api/career", {}, config);
+      console.log(result);
+      this.articles = result.data.contents.articles;
+      return;
+    } catch (e) {
+      console.warn(e);
     }
-  ];
+  }
 }
 </script>
 
