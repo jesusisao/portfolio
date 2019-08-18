@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Prop, Component } from "vue-property-decorator";
+import { Vue, Prop, Component, Watch } from "vue-property-decorator";
 import { TweenMax, Expo } from "gsap";
 
 type CardArticle = {
@@ -48,6 +48,17 @@ export default class FlexCardArticles extends Vue {
   @Prop() articles!: Array<CardArticle>;
 
   mounted() {
+    this.animate();
+  }
+
+  @Watch("articles")
+  articlesChanged(newVal, oldVal) {
+    this.$nextTick(() => {
+      this.animate();
+    });
+  }
+
+  animate() {
     for (let i = 0; i < this.articles.length; i++) {
       TweenMax.fromTo(
         this.$refs["article" + i],
