@@ -19,7 +19,6 @@ export default function firebaseAuthMiddleware(
     .auth()
     .verifyIdToken(token[1])
     .then(decodedToken => {
-      console.log(decodedToken);
       res.locals.user = decodedToken;
       next();
     })

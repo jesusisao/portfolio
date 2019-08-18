@@ -92,7 +92,6 @@ export default class extends Vue {
         return;
       }
       const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
-      console.log(idToken);
       const config = {
         headers: {
           "Content-Type": "application/json",
