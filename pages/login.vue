@@ -78,7 +78,7 @@ export default class extends Vue {
 
       this.storeLogin(result);
       console.log(result);
-      this.$router.push("/");
+      this.$router.push("/profile");
     } catch (e) {
       console.warn(e);
     }
