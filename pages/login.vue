@@ -78,7 +78,7 @@ export default class extends Vue {
 
       this.storeLogin(result);
       console.log(result);
-      this.$router.push("/")
+      this.$router.push("/");
     } catch (e) {
       console.warn(e);
     }
@@ -93,7 +93,13 @@ export default class extends Vue {
       }
       const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
       console.log(idToken);
-      const result = await axios.post("/api/auth/test", { idToken: idToken });
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `JWT ${idToken}`
+        }
+      };
+      const result = await axios.post("/api/auth/test", { a: "a" }, config);
       console.log(result);
     } catch (e) {
       console.warn(e);

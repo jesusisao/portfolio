@@ -1,7 +1,8 @@
 import express from "express";
-import bodyParser from "body-parser"
+import bodyParser from "body-parser";
 import consola from "consola";
-import api from "./api"
+import firebaseAuthMiddleware from "./middleware/firebaseAuth";
+import api from "./api";
 const { Nuxt, Builder } = require("nuxt");
 
 const app = express();
@@ -23,7 +24,8 @@ const start = async () => {
 
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
-  app.use('/api', api)
+  app.use("/api", firebaseAuthMiddleware);
+  app.use("/api", api);
 
   // Give nuxt middleware to express
   app.use(nuxt.render);
