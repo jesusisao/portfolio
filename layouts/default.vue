@@ -14,6 +14,8 @@
       <div class="side-menu">
         <div class="list">
           <nuxt-link class="link" to="/about">About page</nuxt-link>
+          <nuxt-link class="link" to="/profile" v-if="isLoggingIn">Profile</nuxt-link>
+          <nuxt-link class="link" to="/career" v-if="isLoggingIn">Career</nuxt-link>
           <nuxt-link class="link" to="/">自己紹介</nuxt-link>
           <nuxt-link class="link" to="/my-qiita">投稿したQiitaの記事</nuxt-link>
           <nuxt-link class="link" to="/contact">Contact</nuxt-link>
@@ -131,15 +133,18 @@ $title-color: #8b8200;
   color: rgb(163, 163, 163);
   text-align: center;
   border-radius: 5px;
-  background-color: rgb(56, 54, 37);
+  background-color: rgb(85, 87, 61);
+  text-shadow: 0px 0px 7px #242424;
   text-decoration: none;
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
+  opacity: 0.7;
   & + .link {
     margin-top: 10px;
   }
   &:hover {
-    background-color: $title-color;
+    opacity: 1;
+    background-color: rgb(85, 87, 61);
   }
 }
 
@@ -154,7 +159,7 @@ $title-color: #8b8200;
   text-align: center;
   .list {
     padding: 0;
-    margin: 0 0 0 20px;
+    margin: 0 0 0 40px;
     text-align: left;
     vertical-align: middle;
     font-size: 0.8em;
