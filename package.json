@@ -6,11 +6,11 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon server/index.ts --watch server",
-    "build": "nuxt build",
+    "build:express": "tsc server/index.ts --outDir server/dist --esModuleInterop --resolveJsonModule",
+    "build:nuxt": "nuxt build",
     "start": "cross-env NODE_ENV=production node server/dist/server/index.js",
     "generate": "nuxt generate",
-    "test": "jest",
-    "tsc": "tsc server/index.ts --outDir server/dist --esModuleInterop --resolveJsonModule" 
+    "test": "jest"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.21",
@@ -49,5 +49,9 @@
     "nodemon": "^1.19.1",
     "sass-loader": "^7.2.0",
     "vue-jest": "^4.0.0-0"
+  },
+  "engines": {
+    "node": "10.14.1",
+    "yarn": "1.15.2"
   }
 }
