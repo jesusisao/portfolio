@@ -31,9 +31,10 @@ const start = async () => {
   app.use(nuxt.render);
 
   // Listen the server
-  app.listen(port, host);
+  const herokuPort = process.env.PORT || port
+  app.listen(herokuPort, host);
   consola.ready({
-    message: `Server listening on http://${host}:${port}`,
+    message: `Server listening on http://${host}:${herokuPort}`,
     badge: true
   });
 };
