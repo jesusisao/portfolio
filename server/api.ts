@@ -1,6 +1,4 @@
 import express from "express";
-import profile from "./profile.json"
-import career from "./career.json"
 const router = express.Router();
 
 router.post("/auth/test", async (req, res) => {
@@ -15,7 +13,7 @@ router.post("/profile", async (req, res) => {
   res.send({
     result: { errorCode: 0, message: "" },
     contents: {
-      articles: profile
+      articles: []
     }
   });
 });
@@ -25,7 +23,7 @@ router.post("/career", async (req, res) => {
   res.send({
     result: { errorCode: 0, message: "" },
     contents: {
-      articles: career
+      articles: []
     }
   });
 });
