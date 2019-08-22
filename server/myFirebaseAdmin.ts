@@ -1,8 +1,11 @@
 import * as admin from 'firebase-admin';
-const serviceAccount = require("./portfolio-35f3d-24b3426b4864.json");
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+  credential: admin.credential.cert({
+    projectId: process.env.MY_FIREBASE_PROJECT_ID,
+    clientEmail: process.env.MY_FIREBASE_CLIENT_EMAIL,
+    privateKey: process.env.MY_FIREBASE_PRIVATE_KEY!.replace(/\\n/g, '\n')
+  }),
   databaseURL: "https://portfolio-35f3d.firebaseio.com"
 });
 

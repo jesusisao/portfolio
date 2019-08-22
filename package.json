@@ -6,9 +6,10 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon server/index.ts --watch server",
+    "build": "yarn build:express && yarn build:nuxt",
     "build:express": "tsc server/index.ts --outDir server/dist --esModuleInterop --resolveJsonModule",
     "build:nuxt": "nuxt build",
-    "start": "cross-env NODE_ENV=production node server/dist/server/index.js",
+    "start": "cross-env NODE_ENV=production node --require dotenv/config server/dist/server/index.js",
     "generate": "nuxt generate",
     "test": "jest"
   },
@@ -24,6 +25,7 @@
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.11",
     "cross-env": "^5.2.0",
+    "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "firebase": "^6.4.0",
     "firebase-admin": "^8.3.0",
