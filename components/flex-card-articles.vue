@@ -52,7 +52,7 @@ export default class FlexCardArticles extends Vue {
   }
 
   @Watch("articles")
-  articlesChanged(newVal, oldVal) {
+  articlesChanged() {
     this.$nextTick(() => {
       this.animate();
     });

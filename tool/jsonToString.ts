@@ -11,6 +11,7 @@ if (process.argv.length !== 3) {
 }
 
 const jsonPath: string = process.argv[2];
+const filename = jsonPath.match(".+/(.+?)\.[a-z]+([\?#;].*)?$")![1];
 const userJson = require(jsonPath);
 const str = JSON.stringify(userJson);
 const distPath = "./tool/dist";
@@ -18,7 +19,7 @@ try {
   if (!fs.existsSync(distPath)) {
     fs.mkdirSync(distPath);
   }
-  fs.writeFileSync(`${distPath}/generated.txt`, str);
+  fs.writeFileSync(`${distPath}/${filename}.txt`, str);
   consola.success({
     message: `completed.`,
     badge: true
