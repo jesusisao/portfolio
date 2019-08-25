@@ -25,6 +25,7 @@ export default ({ store, req, isDev }) => {
     paths: [
       "displayName",
       "email",
+      "particle.shouldBeStopped"
     ],
     storage: {
       getItem: key =>

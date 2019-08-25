@@ -30,29 +30,37 @@ const generateParticles = (
 @Component({
   computed: {
     ...mapGetters({
-      shouldProcessBeStopped: "particle/shouldProcessBeStopped",
-      isRunning: "particle/isRunning"
+      shouldProcessBeTerminated: "particle/shouldProcessBeTerminated",
+      isRunning: "particle/isRunning",
+      shouldBeStopped: "particle/shouldBeStopped"
     })
   },
   methods: {
     ...mapMutations({
       addRunningIds: "particle/addRunningIds",
-      moveRunningIdsToStopIds: "particle/moveRunningIdsToStopIds"
+      moveRunningIdsToStopIds: "particle/moveRunningIdsToStopIds",
+      start: "particle/start",
+      stop: "particle/stop"
     })
   }
 })
 export default class ParticleCanvas extends Vue {
   private dots: Array<Particle> = [];
   public isRunning: any;
-  public shouldProcessBeStopped: any;
+  public shouldBeStopped: any;
+  public shouldProcessBeTerminated: any;
   public addRunningIds: any;
   public moveRunningIdsToStopIds: any;
+  public start :any;
+  public stop :any;
 
   mounted() {
-    this.startCanvas();
+    this.writeCanvas(false);
   }
 
   startCanvas() {
+    this.start()
+    console.log(this.shouldBeStopped)
     this.writeCanvas(false);
   }
 
@@ -61,7 +69,6 @@ export default class ParticleCanvas extends Vue {
   }
 
   writeCanvas(doRegenerateDots: boolean) {
-    this.stopCanvas();
     const { canvasWrapper } = this.$refs;
     if (!isElement(canvasWrapper)) return;
     const canvasWidth: number = canvasWrapper.clientWidth;
@@ -85,12 +92,11 @@ export default class ParticleCanvas extends Vue {
     canvasHeight: number,
     pid: number
   ) {
-    if (this.shouldProcessBeStopped(pid)) return;
+    if (this.shouldProcessBeTerminated(pid)) return;
 
     const forRecursion = () =>
       this.updateCanvas(canvasContext, canvasWidth, canvasHeight, pid);
     canvasContext.clearRect(0, 0, canvasWidth, canvasHeight);
-    requestAnimationFrame(forRecursion);
 
     for (let i = 0; i < this.dots.length; i = (i + 1) | 0) {
       this.dots[i].drawAndUpdatePosition(canvasContext);
@@ -119,10 +125,16 @@ export default class ParticleCanvas extends Vue {
     radialGradient.addColorStop(1.0, "rgba(0, 0, 0, 0.6)");
     canvasContext.fillStyle = radialGradient;
     canvasContext.fillRect(-5, -5, canvasWidth + 5, canvasHeight + 5);
+
+    console.log(this.shouldBeStopped)
+    if (!this.shouldBeStopped) {
+      requestAnimationFrame(forRecursion);
+    }
   }
 
   stopCanvas() {
-    if (!this.isRunning) return;
+    this.stop()
+    console.log(this.shouldBeStopped)
     this.moveRunningIdsToStopIds();
   }
 }

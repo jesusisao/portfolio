@@ -19,7 +19,7 @@
           <nuxt-link class="link" to="/">自己紹介</nuxt-link>
           <nuxt-link class="link" to="/my-qiita">投稿したQiitaの記事</nuxt-link>
           <nuxt-link class="link" to="/contact">Contact</nuxt-link>
-          <template v-if="isRunning">
+          <template v-if="isRunning && !shouldBeStopped">
             <div class="link" @click="$refs.canvas.stopCanvas()">Stop Canvas</div>
           </template>
           <template v-else>
@@ -46,6 +46,7 @@ import firebase from "~/mixins/myFirebase";
   computed: {
     ...mapGetters({
       isRunning: "particle/isRunning",
+      shouldBeStopped: "particle/shouldBeStopped",
       isLoggingIn: "isLoggingIn"
     }),
     ...mapState(["displayName", "email"])
