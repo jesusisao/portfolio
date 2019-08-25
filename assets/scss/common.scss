@@ -8,3 +8,13 @@ body {
   font-family: "Wire One";
   letter-spacing: 3px;
 }
+
+// b-tableのヘッダを隠すのに、scoped cssだとclassがうまく適用できないため追加
+.b-table-hidden-header {
+  display: none;
+}
+
+// style binding用。
+.bTableHiddenHeader {
+  @extend .b-table-hidden-header;
+}

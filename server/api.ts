@@ -18,7 +18,7 @@ router.post("/profile", async (req, res) => {
   const pool = await getPool();
   try {
     const results = await pool.query(
-      "SELECT * FROM articles WHERE title = 'career'"
+      "SELECT * FROM articles WHERE title = 'profile'"
     );
     res.send({
       result: { errorCode: 0, message: "" },
@@ -36,7 +36,7 @@ router.post("/career", async (req, res) => {
   const pool = await getPool();
   try {
     const results = await pool.query(
-      "SELECT * FROM articles WHERE title = 'profile'"
+      "SELECT * FROM articles WHERE title = 'career'"
     );
     res.send({
       result: { errorCode: 0, message: "" },

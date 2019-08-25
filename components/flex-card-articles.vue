@@ -12,6 +12,7 @@
       </h1>
       <p v-for="(sentence, i) in article.sentences" :key="i">{{ sentence }}</p>
       <b-table
+        :thead-class="{ bTableHiddenHeader: article.table.hideHeader }"
         :items="article.table.items"
         :fields="article.table.fields"
         v-if="article.table"
