@@ -8,7 +8,7 @@ export const mutations = {
   addRunningIds(state, id) {
     state.runningIds.push(id);
   },
-  moveRunningIdsToterminateIds(state) {
+  moveRunningIdsToTerminateIds(state) {
     state.terminateIds = state.terminateIds.concat(state.runningIds);
     state.runningIds = [];
   },

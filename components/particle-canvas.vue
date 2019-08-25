@@ -38,7 +38,7 @@ const generateParticles = (
   methods: {
     ...mapMutations({
       addRunningIds: "particle/addRunningIds",
-      moveRunningIdsToStopIds: "particle/moveRunningIdsToStopIds",
+      moveRunningIdsToTerminateIds: "particle/moveRunningIdsToTerminateIds",
       start: "particle/start",
       stop: "particle/stop"
     })
@@ -50,7 +50,7 @@ export default class ParticleCanvas extends Vue {
   public shouldBeStopped: any;
   public shouldProcessBeTerminated: any;
   public addRunningIds: any;
-  public moveRunningIdsToStopIds: any;
+  public moveRunningIdsToTerminateIds: any;
   public start :any;
   public stop :any;
 
@@ -60,7 +60,6 @@ export default class ParticleCanvas extends Vue {
 
   startCanvas() {
     this.start()
-    console.log(this.shouldBeStopped)
     this.writeCanvas(false);
   }
 
@@ -81,6 +80,7 @@ export default class ParticleCanvas extends Vue {
     if (doRegenerateDots || this.dots.length === 0) {
       this.dots = generateParticles(canvasWidth, canvasHeight);
     }
+    this.moveRunningIdsToTerminateIds(); 
     const pid = new Date().getTime();
     this.addRunningIds(pid);
     this.updateCanvas(canvasContext, canvasWidth, canvasHeight, pid);
@@ -126,7 +126,6 @@ export default class ParticleCanvas extends Vue {
     canvasContext.fillStyle = radialGradient;
     canvasContext.fillRect(-5, -5, canvasWidth + 5, canvasHeight + 5);
 
-    console.log(this.shouldBeStopped)
     if (!this.shouldBeStopped) {
       requestAnimationFrame(forRecursion);
     }
@@ -134,8 +133,7 @@ export default class ParticleCanvas extends Vue {
 
   stopCanvas() {
     this.stop()
-    console.log(this.shouldBeStopped)
-    this.moveRunningIdsToStopIds();
+    this.moveRunningIdsToTerminateIds();
   }
 }
 </script>

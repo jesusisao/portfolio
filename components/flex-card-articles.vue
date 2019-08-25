@@ -48,7 +48,7 @@ type BTable = {
 @Component
 export default class FlexCardArticles extends Vue {
   @Prop() articles!: Array<CardArticle>;
-  @Prop() flexBasis: number = 400;
+  @Prop({ default: 400 }) flexBasis!: number;
 
   mounted() {
     this.animate();
