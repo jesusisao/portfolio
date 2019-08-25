@@ -2,7 +2,7 @@
   <div class="wrapper">
     <h1 class="title">{{ title }}</h1>
     <p>※ログイン時のみ見れるコンテンツです。</p>
-    <flex-card-articles :articles="articles" />
+    <flex-card-articles :articles="articles" :flexBasis="800" />
   </div>
 </template>
 

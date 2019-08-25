@@ -3,6 +3,7 @@
     <article
       class="contents"
       v-for="(article, index) in articles"
+      :style="{flexBasis: flexBasis + 'px'}"
       :key="index"
       :ref="`article${index}`"
     >
@@ -47,6 +48,7 @@ type BTable = {
 @Component
 export default class FlexCardArticles extends Vue {
   @Prop() articles!: Array<CardArticle>;
+  @Prop() flexBasis: number = 400;
 
   mounted() {
     this.animate();
@@ -96,7 +98,7 @@ export default class FlexCardArticles extends Vue {
     align-items: center;
     padding: 30px;
     margin: 10px;
-    width: 400px;
+    // flex-basis: 400px;
     box-sizing: border-box;
     box-shadow: 0px 0px 50px -15px #1a1a1a;
     h1 {
