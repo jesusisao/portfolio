@@ -18,11 +18,6 @@
         <button class="col-4" @click="login">ログイン</button>
         <div class="col-4" />
       </div>
-      <div class="row">
-        <div class="col-4" />
-        <button class="col-4" @click="testPost">テスト</button>
-        <div class="col-4" />
-      </div>
     </div>
   </div>
 </template>
@@ -132,7 +127,7 @@ export default class extends Vue {
   background-color: $background-color;
   box-shadow: 0px 0px 50px -15px #1a1a1a;
   width: 500px;
-  min-height: 300px;
+  min-height: 200px;
   .row {
     label {
       text-align: left;
@@ -162,6 +157,11 @@ export default class extends Vue {
     background-color: rgb(180, 174, 141);
     border-radius: 5px;
     box-shadow: 0px 0px 20px -7px #1a1a1a;
+    opacity: 0.7;
+    transition: 0.2s ease-in-out;
+    &:hover {
+      opacity: 1;
+    }
   }
 }
 </style>
