@@ -14,8 +14,14 @@
       <div class="side-menu">
         <div class="list">
           <nuxt-link class="link" to="/about">About page</nuxt-link>
-          <nuxt-link class="link" to="/profile" v-if="isLoggingIn">Profile※</nuxt-link>
-          <nuxt-link class="link" to="/career" v-if="isLoggingIn">Career※</nuxt-link>
+          <nuxt-link class="link" to="/profile" v-if="isLoggingIn">
+            Profile
+            <font-awesome-icon :icon="['fas', 'key']" class="icon" />
+          </nuxt-link>
+          <nuxt-link class="link" to="/career" v-if="isLoggingIn">
+            Career
+            <font-awesome-icon :icon="['fas', 'key']" class="icon" />
+          </nuxt-link>
           <nuxt-link class="link" to="/">自己紹介</nuxt-link>
           <nuxt-link class="link" to="/my-qiita">投稿したQiitaの記事</nuxt-link>
           <nuxt-link class="link" to="/contact">Contact</nuxt-link>
