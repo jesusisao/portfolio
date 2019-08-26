@@ -37,6 +37,7 @@
     "nuxt": "^2.8.1",
     "nuxt-fontawesome": "^0.4.0",
     "promise-mysql": "^4.1.0",
+    "three": "^0.107.0",
     "ts-node": "^8.3.0",
     "typescript": "^3.5.3",
     "vue-property-decorator": "^8.2.1",
@@ -56,6 +57,6 @@
   },
   "engines": {
     "node": "10.14.1",
-    "yarn": "1.15.2"
+    "yarn": "1.17.3"
   }
 }
