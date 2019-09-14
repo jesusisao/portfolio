@@ -75,7 +75,7 @@ export default class ParticleCanvas extends Vue {
     // 配置する範囲
     const SIZE = 3000;
     // 配置する個数
-    const LENGTH = 1000;
+    const LENGTH = 3000;
     for (let i = 0; i < LENGTH; i++) {
       geometry.vertices.push(
         new THREE.Vector3(
@@ -88,16 +88,20 @@ export default class ParticleCanvas extends Vue {
     // マテリアルを作成
     const material = new THREE.PointsMaterial({
       // 一つ一つのサイズ
-      size: 10,
-      // 色
-      color: 0xffffff
+      size: 20,
+      map: this.createCanvasMaterial(255, 246, 201, 256, 1, 0.3),
+      transparent: true,
+      depthWrite: false
     });
 
     const mesh = new THREE.Points(geometry, material);
     scene.add(mesh);
 
-    const light = new THREE.AmbientLight(0xFFFFFF, 1.0);
-    scene.add(light);
+    // const light = new THREE.AmbientLight(0xFFFFFF, 1.0);
+    // scene.add(light);
+
+    scene.fog = new THREE.Fog(0x313131, 50, 2000);
+    scene.background = new THREE.Color( 0x313131 );
 
     // start animation
     this.moveRunningIdsToTerminateIds();
@@ -139,6 +143,37 @@ export default class ParticleCanvas extends Vue {
   stopCanvas() {
     this.stop();
     this.moveRunningIdsToTerminateIds();
+  }
+
+  createCanvasMaterial(colorR: number, colorG: number, colorB: number, size: number, alpha: number, blur: number) {
+    const matCanvas = document.createElement('canvas');
+    matCanvas.width = matCanvas.height = size;
+    const matContext = matCanvas.getContext('2d')!;
+    // create exture object from canvas.
+    const texture = new THREE.Texture(matCanvas);
+    // Draw a circle
+    const center = size / 2;
+    matContext.globalAlpha = alpha;
+    const blurDistance = 1 - blur
+
+    const radgrad = matContext.createRadialGradient(
+      center,
+      center,
+      0,
+      center,
+      center,
+      center
+    );
+    radgrad.addColorStop(0, `rgba(${colorR}, ${colorG}, ${colorB}, 1)`);
+    radgrad.addColorStop(blurDistance, `rgba(${colorR}, ${colorG}, ${colorB}, ${blurDistance})`);
+    radgrad.addColorStop(1, `rgba(${colorR}, ${colorG}, ${colorB}, 0)`);
+
+    matContext.fillStyle = radgrad;
+    matContext.fillRect(0, 0, size, size);
+    // need to set needsUpdate
+    texture.needsUpdate = true;
+    // return a texture made from the canvas
+    return texture;
   }
 }
 </script>
