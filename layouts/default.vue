@@ -25,6 +25,9 @@
           <nuxt-link class="link" to="/">自己紹介</nuxt-link>
           <nuxt-link class="link" to="/my-qiita">投稿したQiitaの記事</nuxt-link>
           <nuxt-link class="link" to="/contact">Contact</nuxt-link>
+          <br>
+          <br>
+          <nuxt-link class="link" to="/see-canvas">Canvasを見る</nuxt-link>
           <template v-if="isRunning && !shouldBeStopped">
             <div class="link" @click="$refs.canvas.stopCanvas()">Stop Canvas</div>
           </template>
@@ -47,7 +50,7 @@ import firebase from "~/mixins/myFirebase";
 
 @Component({
   components: {
-    Particle: () => import("~/components/particle-canvas.vue")
+    Particle: () => import("~/components/webgl-canvas.vue")
   },
   computed: {
     ...mapGetters({
