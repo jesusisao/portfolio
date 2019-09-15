@@ -27,8 +27,8 @@ export default class extends Vue {
       icon: ["fas", "sitemap"],
       sentences: [
         "このサイトは私 @jesus_isao のポートフォリオとして、転職時に採用に関わる方に見てもらうことを想定して作られました。",
-        "Nuxt.js + TypeScriptで作られています。背景はHTML5のCanvasで描いて動かしています。認証にはFirebase Authenticationを使用しており、そこで発行されたトークンをバックエンドのExpressで検証しています。",
-        "背景のcanvasは文字を読む時邪魔だった場合に備えてStopできるようにしています。"
+        "Nuxt.js + TypeScriptで作られています。背景はWebGLで描いて動かしています。認証にはFirebase Authenticationを使用しており、そこで発行されたトークンをバックエンドのExpressで検証しています。",
+        "背景のWebGLは文字を読む時邪魔だった場合に備えてStopできるようにしています。"
       ]
     }
   ];
