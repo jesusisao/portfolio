@@ -18,3 +18,13 @@ body {
 .bTableHiddenHeader {
   @extend .b-table-hidden-header;
 }
+
+// ハンバーガーメニュー用
+.bm-burger-bars {
+  background: rgba(254, 255, 173, 0.5) !important;
+}
+
+.bm-burger-button {
+  left: 18px !important;
+  top: 40px !important;
+}

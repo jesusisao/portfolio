@@ -32,7 +32,8 @@ const nuxtConfig: NuxtConfiguration = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~/plugins/cookieStorage.js',
+    { src: '~/plugins/burger-menu', ssr: false },
+    '~/plugins/cookie-storage.js',
   ],
   /*
   ** Nuxt.js dev-modules

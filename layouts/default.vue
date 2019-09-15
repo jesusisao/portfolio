@@ -2,52 +2,103 @@
   <div>
     <particle class="back-canvas" ref="canvas" />
     <div class="front">
-      <div class="login-info" v-if="isLoggingIn">
-        <p class="login-info-li">ログイン中</p>
-        <p class="login-info-li" v-if="displayName">{{ displayName }}</p>
-        <p class="login-info-li">{{ email }}</p>
-        <p class="login-info-li button" @click="logout">Logout</p>
-      </div>
-      <div class="login-info" v-else>
-        <nuxt-link class="login-info-li button" to="/login">Login</nuxt-link>
-      </div>
-      <div class="side-menu">
-        <div class="list">
-          <nuxt-link class="link" to="/about">About page</nuxt-link>
-          <nuxt-link class="link" to="/profile" v-if="isLoggingIn">
+      <!-- スマホ対応用のハンバーガーメニュー -->
+      <nav
+        class="navbar header"
+        role="navigation"
+        aria-label="main navigation"
+        v-if="isSmartPhoneMode"
+      >
+        <slide left width="300">
+          <template v-if="isLoggingIn">
+            <p class="slide-link">ログイン中</p>
+            <p class="slide-link" v-if="displayName">{{ displayName }}</p>
+            <p class="slide-link">{{ email }}</p>
+            <p class="slide-link" @click="logout">Logout</p>
+          </template>
+          <template v-else>
+            <nuxt-link class="slide-link" to="/login">Login</nuxt-link>
+          </template>
+
+          <hr class="slide-splitter" />
+
+          <nuxt-link class="slide-link" to="/about">About page</nuxt-link>
+          <nuxt-link class="slide-link" to="/profile" v-if="isLoggingIn">
             Profile
             <font-awesome-icon :icon="['fas', 'key']" class="icon" />
           </nuxt-link>
-          <nuxt-link class="link" to="/career" v-if="isLoggingIn">
+          <nuxt-link class="slide-link" to="/career" v-if="isLoggingIn">
             Career
             <font-awesome-icon :icon="['fas', 'key']" class="icon" />
           </nuxt-link>
-          <nuxt-link class="link" to="/">自己紹介</nuxt-link>
-          <nuxt-link class="link" to="/my-qiita">投稿したQiitaの記事</nuxt-link>
-          <nuxt-link class="link" to="/contact">Contact</nuxt-link>
-          <br>
-          <br>
-          <nuxt-link class="link" to="/see-canvas">See canvas</nuxt-link>
+          <nuxt-link class="slide-link" to="/">自己紹介</nuxt-link>
+          <nuxt-link class="slide-link" to="/my-qiita">投稿したQiitaの記事</nuxt-link>
+          <nuxt-link class="slide-link" to="/contact">Contact</nuxt-link>
+          <br />
+          <br />
+          <nuxt-link class="slide-link" to="/see-canvas">See canvas</nuxt-link>
           <template v-if="isRunning && !shouldBeStopped">
-            <div class="link" @click="$refs.canvas.stopCanvas()">
-              <font-awesome-icon :icon="['fas', 'stop-circle']" class="icon" />
-              Stop
+            <div class="slide-link" @click="$refs.canvas.stopCanvas()">
+              <font-awesome-icon :icon="['fas', 'stop-circle']" class="icon" />Stop
             </div>
           </template>
           <template v-else>
-            <div class="link" @click="$refs.canvas.startCanvas()">
-              <font-awesome-icon :icon="['fas', 'play-circle']" class="icon" />
-              Start
+            <div class="slide-link" @click="$refs.canvas.startCanvas()">
+              <font-awesome-icon :icon="['fas', 'play-circle']" class="icon" />Start
             </div>
           </template>
-          <div class="link" @click="$refs.canvas.regenerateCanvas()">
-            <font-awesome-icon :icon="['fas', 'redo']" class="icon" />
-            Regenerate
+          <div class="slide-link" @click="$refs.canvas.regenerateCanvas()">
+            <font-awesome-icon :icon="['fas', 'redo']" class="icon" />Regenerate
           </div>
+        </slide>
+      </nav>
+
+      <!-- PC用の通常メニュー -->
+      <template v-if="!isSmartPhoneMode">
+        <div class="login-info" v-if="isLoggingIn">
+          <p class="login-info-li">ログイン中</p>
+          <p class="login-info-li" v-if="displayName">{{ displayName }}</p>
+          <p class="login-info-li">{{ email }}</p>
+          <p class="login-info-li button" @click="logout">Logout</p>
         </div>
-        <span class="line" />
-      </div>
-      <nuxt class="main" />
+        <div class="login-info" v-else>
+          <nuxt-link class="login-info-li button" to="/login">Login</nuxt-link>
+        </div>
+        <div class="side-menu">
+          <div class="list">
+            <nuxt-link class="link" to="/about">About page</nuxt-link>
+            <nuxt-link class="link" to="/profile" v-if="isLoggingIn">
+              Profile
+              <font-awesome-icon :icon="['fas', 'key']" class="icon" />
+            </nuxt-link>
+            <nuxt-link class="link" to="/career" v-if="isLoggingIn">
+              Career
+              <font-awesome-icon :icon="['fas', 'key']" class="icon" />
+            </nuxt-link>
+            <nuxt-link class="link" to="/">自己紹介</nuxt-link>
+            <nuxt-link class="link" to="/my-qiita">投稿したQiitaの記事</nuxt-link>
+            <nuxt-link class="link" to="/contact">Contact</nuxt-link>
+            <br />
+            <br />
+            <nuxt-link class="link" to="/see-canvas">See canvas</nuxt-link>
+            <template v-if="isRunning && !shouldBeStopped">
+              <div class="link" @click="$refs.canvas.stopCanvas()">
+                <font-awesome-icon :icon="['fas', 'stop-circle']" class="icon" />Stop
+              </div>
+            </template>
+            <template v-else>
+              <div class="link" @click="$refs.canvas.startCanvas()">
+                <font-awesome-icon :icon="['fas', 'play-circle']" class="icon" />Start
+              </div>
+            </template>
+            <div class="link" @click="$refs.canvas.regenerateCanvas()">
+              <font-awesome-icon :icon="['fas', 'redo']" class="icon" />Regenerate
+            </div>
+          </div>
+          <span class="line" />
+        </div>
+      </template>
+      <nuxt :class="{main: !isSmartPhoneMode }" />
     </div>
   </div>
 </template>
@@ -77,6 +128,7 @@ import firebase from "~/mixins/myFirebase";
 })
 export default class extends Vue {
   private storeLogout: any;
+  private isSmartPhoneMode: boolean = false;
 
   async logout() {
     try {
@@ -85,6 +137,19 @@ export default class extends Vue {
       console.info("ログアウトしました。");
     } catch (e) {
       console.warn(e);
+    }
+  }
+
+  mounted() {
+    window.addEventListener("resize", this.handleResize);
+    this.handleResize();
+  }
+
+  handleResize() {
+    if (window.innerWidth <= 650) {
+      this.isSmartPhoneMode = true;
+    } else {
+      this.isSmartPhoneMode = false;
     }
   }
 }
@@ -214,5 +279,16 @@ $title-color: #8b8200;
     width: 2px;
     z-index: -1;
   }
+}
+
+.slide-link {
+  margin: 0;
+  color: rgb(163, 163, 163);
+  text-decoration: none;
+}
+
+.slide-splitter {
+  border-top: #a3a3a3 solid 3px;
+  margin-right: 40px;
 }
 </style>
