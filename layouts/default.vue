@@ -27,14 +27,23 @@
           <nuxt-link class="link" to="/contact">Contact</nuxt-link>
           <br>
           <br>
-          <nuxt-link class="link" to="/see-canvas">Canvasを見る</nuxt-link>
+          <nuxt-link class="link" to="/see-canvas">See canvas</nuxt-link>
           <template v-if="isRunning && !shouldBeStopped">
-            <div class="link" @click="$refs.canvas.stopCanvas()">Stop Canvas</div>
+            <div class="link" @click="$refs.canvas.stopCanvas()">
+              <font-awesome-icon :icon="['fas', 'stop-circle']" class="icon" />
+              Stop
+            </div>
           </template>
           <template v-else>
-            <div class="link" @click="$refs.canvas.startCanvas()">Restart Canvas</div>
+            <div class="link" @click="$refs.canvas.startCanvas()">
+              <font-awesome-icon :icon="['fas', 'play-circle']" class="icon" />
+              Start
+            </div>
           </template>
-          <div class="link" @click="$refs.canvas.regenerateCanvas()">Regenerate Canvas</div>
+          <div class="link" @click="$refs.canvas.regenerateCanvas()">
+            <font-awesome-icon :icon="['fas', 'redo']" class="icon" />
+            Regenerate
+          </div>
         </div>
         <span class="line" />
       </div>
