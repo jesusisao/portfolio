@@ -91,7 +91,8 @@ export default class ParticleCanvas extends Vue {
       size: 20,
       map: this.createCanvasMaterial(255, 246, 201, 256, 1, 0.3),
       transparent: true,
-      depthWrite: false
+      depthWrite: false,
+      blending: THREE.AdditiveBlending
     });
 
     const mesh = new THREE.Points(geometry, material);
