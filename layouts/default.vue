@@ -128,7 +128,7 @@ import firebase from "~/mixins/myFirebase";
 })
 export default class extends Vue {
   private storeLogout: any;
-  private isSmartPhoneMode: boolean = false;
+  public isSmartPhoneMode: boolean = false;
 
   async logout() {
     try {
@@ -143,6 +143,13 @@ export default class extends Vue {
   mounted() {
     window.addEventListener("resize", this.handleResize);
     this.handleResize();
+
+    // スマホでスクロールが行きすぎないようにする対応
+    document.addEventListener('touchmove', function(e) {
+      if (window.innerHeight >= document.body.scrollHeight) {
+        e.preventDefault();
+      }
+    }, false);
   }
 
   handleResize() {
