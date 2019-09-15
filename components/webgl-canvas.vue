@@ -8,6 +8,7 @@
 import { Vue, Component } from "vue-property-decorator";
 import { mapGetters, mapMutations } from "vuex";
 import * as THREE from "three";
+import { randomRange } from "~/mixins/random";
 const OrbitControls = require('three-orbitcontrols')
 
 const isElement = (x: any): x is Element => x instanceof Element;
@@ -57,25 +58,12 @@ export default class ParticleCanvas extends Vue {
     const canvasWidth: number = canvasWrapper.clientWidth;
     const canvasHeight: number = canvasWrapper.clientHeight;
 
-    const renderer = new THREE.WebGLRenderer({
-      canvas: <HTMLCanvasElement>document.getElementById("canvas")
-    });
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(canvasWidth, canvasHeight);
-
-    const scene = new THREE.Scene();
-
-    const camera = new THREE.PerspectiveCamera(45, canvasWidth / canvasHeight);
-    camera.position.set(0, 0, 1000);
-    const controls = new OrbitControls(camera);
-    controls.autoRotate = false;
-
     // 形状データを作成
     const geometry = new THREE.Geometry();
     // 配置する範囲
     const SIZE = 3000;
     // 配置する個数
-    const LENGTH = 3000;
+    const LENGTH = 1000;
     for (let i = 0; i < LENGTH; i++) {
       geometry.vertices.push(
         new THREE.Vector3(
@@ -85,24 +73,45 @@ export default class ParticleCanvas extends Vue {
         )
       );
     }
-    // マテリアルを作成
-    const material = new THREE.PointsMaterial({
-      // 一つ一つのサイズ
-      size: 20,
-      map: this.createCanvasMaterial(255, 246, 201, 256, 1, 0.3),
-      transparent: true,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending
-    });
 
-    const mesh = new THREE.Points(geometry, material);
-    scene.add(mesh);
+    // --------------------------------------------
 
-    // const light = new THREE.AmbientLight(0xFFFFFF, 1.0);
-    // scene.add(light);
+    const scene = new THREE.Scene();
+
+    for (let i = 0; i < 10; i++) {
+      const material = new THREE.PointsMaterial({
+        size: randomRange(20, 40),
+        map: this.createCanvasMaterial(
+          255, randomRange(146, 246), randomRange(101, 201), 
+          256, 
+          1, 
+          0.85),
+        transparent: true,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending
+      });
+
+      const particles = new THREE.Points(geometry, material);
+      particles.rotation.x = Math.random() * 6;
+      particles.rotation.y = Math.random() * 6;
+      particles.rotation.z = Math.random() * 6;
+      scene.add(particles);
+    }
 
     scene.fog = new THREE.Fog(0x313131, 50, 2000);
     scene.background = new THREE.Color( 0x313131 );
+
+    const renderer = new THREE.WebGLRenderer({
+      canvas: <HTMLCanvasElement>document.getElementById("canvas")
+    });
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(canvasWidth, canvasHeight);
+
+    const camera = new THREE.PerspectiveCamera(45, canvasWidth / canvasHeight);
+    camera.position.set(0, 0, 500);
+    const controls = new OrbitControls(camera);
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 0.5;
 
     // start animation
     this.moveRunningIdsToTerminateIds();
@@ -132,7 +141,17 @@ export default class ParticleCanvas extends Vue {
       );
 
     // main animation processing
+    const time = Date.now() * 0.00005;
+    for (let i = 0; i < scene.children.length; i++) {
+      const object = scene.children[i];
+      if (object instanceof THREE.Points) {
+        if (i % 3 === 0) object.rotation.x = (time * (i < 5 ? i + 1 : -(i + 1))) * 0.08;
+        if (i % 3 === 1) object.rotation.y = (time * (i < 5 ? i + 1 : -(i + 1))) * 0.08;
+        if (i % 3 === 2) object.rotation.z = (time * (i < 5 ? i + 1 : -(i + 1))) * 0.08;
+      }
+    }
 
+    // ---------------------------------------------
     controls.update();
     renderer.render(scene, camera);
 
