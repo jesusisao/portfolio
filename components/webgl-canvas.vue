@@ -5,11 +5,11 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
+import { Vue, Component, Prop } from "vue-property-decorator";
 import { mapGetters, mapMutations } from "vuex";
 import * as THREE from "three";
 import { randomRange } from "~/mixins/random";
-const OrbitControls = require('three-orbitcontrols')
+const OrbitControls = require("three-orbitcontrols");
 
 const isElement = (x: any): x is Element => x instanceof Element;
 
@@ -39,6 +39,8 @@ export default class ParticleCanvas extends Vue {
   public start: any;
   public stop: any;
 
+  @Prop() cameraController!: Element;
+
   mounted() {
     this.writeCanvas(false);
   }
@@ -57,6 +59,7 @@ export default class ParticleCanvas extends Vue {
     if (!isElement(canvasWrapper)) return;
     const canvasWidth: number = canvasWrapper.clientWidth;
     const canvasHeight: number = canvasWrapper.clientHeight;
+    const canvas = <HTMLCanvasElement>document.getElementById("canvas");
 
     // 形状データを作成
     const geometry = new THREE.Geometry();
@@ -82,10 +85,13 @@ export default class ParticleCanvas extends Vue {
       const material = new THREE.PointsMaterial({
         size: randomRange(20, 40),
         map: this.createCanvasMaterial(
-          255, randomRange(146, 246), randomRange(101, 201), 
-          256, 
-          1, 
-          0.85),
+          255,
+          randomRange(146, 246),
+          randomRange(101, 201),
+          256,
+          1,
+          0.85
+        ),
         transparent: true,
         depthWrite: false,
         blending: THREE.AdditiveBlending
@@ -99,17 +105,17 @@ export default class ParticleCanvas extends Vue {
     }
 
     scene.fog = new THREE.Fog(0x313131, 50, 2000);
-    scene.background = new THREE.Color( 0x313131 );
+    scene.background = new THREE.Color(0x313131);
 
     const renderer = new THREE.WebGLRenderer({
-      canvas: <HTMLCanvasElement>document.getElementById("canvas")
+      canvas: canvas
     });
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(canvasWidth, canvasHeight);
 
     const camera = new THREE.PerspectiveCamera(45, canvasWidth / canvasHeight);
     camera.position.set(0, 0, 500);
-    const controls = new OrbitControls(camera);
+    const controls = new OrbitControls(camera, this.cameraController);
     controls.autoRotate = true;
     controls.autoRotateSpeed = 0.5;
 
@@ -145,9 +151,12 @@ export default class ParticleCanvas extends Vue {
     for (let i = 0; i < scene.children.length; i++) {
       const object = scene.children[i];
       if (object instanceof THREE.Points) {
-        if (i % 3 === 0) object.rotation.x = (time * (i < 5 ? i + 1 : -(i + 1))) * 0.08;
-        if (i % 3 === 1) object.rotation.y = (time * (i < 5 ? i + 1 : -(i + 1))) * 0.08;
-        if (i % 3 === 2) object.rotation.z = (time * (i < 5 ? i + 1 : -(i + 1))) * 0.08;
+        if (i % 3 === 0)
+          object.rotation.x = time * (i < 5 ? i + 1 : -(i + 1)) * 0.08;
+        if (i % 3 === 1)
+          object.rotation.y = time * (i < 5 ? i + 1 : -(i + 1)) * 0.08;
+        if (i % 3 === 2)
+          object.rotation.z = time * (i < 5 ? i + 1 : -(i + 1)) * 0.08;
       }
     }
 
@@ -165,16 +174,23 @@ export default class ParticleCanvas extends Vue {
     this.moveRunningIdsToTerminateIds();
   }
 
-  createCanvasMaterial(colorR: number, colorG: number, colorB: number, size: number, alpha: number, blur: number) {
-    const matCanvas = document.createElement('canvas');
+  createCanvasMaterial(
+    colorR: number,
+    colorG: number,
+    colorB: number,
+    size: number,
+    alpha: number,
+    blur: number
+  ) {
+    const matCanvas = document.createElement("canvas");
     matCanvas.width = matCanvas.height = size;
-    const matContext = matCanvas.getContext('2d')!;
+    const matContext = matCanvas.getContext("2d")!;
     // create exture object from canvas.
     const texture = new THREE.Texture(matCanvas);
     // Draw a circle
     const center = size / 2;
     matContext.globalAlpha = alpha;
-    const blurDistance = 1 - blur
+    const blurDistance = 1 - blur;
 
     const radgrad = matContext.createRadialGradient(
       center,
@@ -185,7 +201,10 @@ export default class ParticleCanvas extends Vue {
       center
     );
     radgrad.addColorStop(0, `rgba(${colorR}, ${colorG}, ${colorB}, 1)`);
-    radgrad.addColorStop(blurDistance, `rgba(${colorR}, ${colorG}, ${colorB}, ${blurDistance})`);
+    radgrad.addColorStop(
+      blurDistance,
+      `rgba(${colorR}, ${colorG}, ${colorB}, ${blurDistance})`
+    );
     radgrad.addColorStop(1, `rgba(${colorR}, ${colorG}, ${colorB}, 0)`);
 
     matContext.fillStyle = radgrad;

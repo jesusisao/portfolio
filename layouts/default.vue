@@ -1,7 +1,16 @@
 <template>
   <div>
-    <particle class="back-canvas" ref="canvas" />
+    <particle class="back-canvas" ref="canvas" :cameraController="$refs.cameraController" />
     <div class="front">
+      <!-- このDOMを渡してWebGLのカメラの操作をさせる -->
+      <div
+        class="camera-controller"
+        ref="cameraController"
+        title="このアイコンの上でドラッグやスクロールを行うと、WebGLのカメラが動かせます。"
+      >
+        <font-awesome-icon :icon="['fas', 'camera']" class="icon" />
+      </div>
+
       <!-- スマホ対応用のハンバーガーメニュー -->
       <nav
         class="navbar header"
@@ -64,6 +73,7 @@
         <div class="login-info" v-else>
           <nuxt-link class="login-info-li button" to="/login">Login</nuxt-link>
         </div>
+
         <div class="side-menu">
           <div class="list">
             <nuxt-link class="link" to="/about">About page</nuxt-link>
@@ -145,11 +155,15 @@ export default class extends Vue {
     this.handleResize();
 
     // スマホでスクロールが行きすぎないようにする対応
-    document.addEventListener('touchmove', function(e) {
-      if (window.innerHeight >= document.body.scrollHeight) {
-        e.preventDefault();
-      }
-    }, false);
+    document.addEventListener(
+      "touchmove",
+      function(e) {
+        if (window.innerHeight >= document.body.scrollHeight) {
+          e.preventDefault();
+        }
+      },
+      false
+    );
   }
 
   handleResize() {
@@ -215,6 +229,27 @@ $title-color: #8b8200;
     & + .login-info-li {
       margin-top: 10px;
     }
+  }
+}
+
+.camera-controller {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(31, 31, 31);
+  font-size: 40px;
+  border-radius: 50%;
+  background-color: #fffeae;
+  opacity: 0.1;
+  width: 100px;
+  height: 100px;
+  transition: opacity 0.3s ease-in-out;
+  &:hover {
+    opacity: 0.7;
   }
 }
 
