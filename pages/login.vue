@@ -4,19 +4,19 @@
     <p>ログインすると、@jesus_isaoの本名や職務経歴にアクセスすることができるようになります。</p>
     <div class="contents container" ref="loginBox">
       <div class="row">
-        <label for="email" class="col-4 col-xs-12">メール</label>
-        <input type="text" name="email" v-model="email" class="col-6 col-xs-12" />
-        <div class="col-2 col-xs-0" />
+        <label for="email" class="col-sm-4 col-xs-12">メール</label>
+        <input type="text" name="email" v-model="email" class="col-sm-6 col-xs-12" />
+        <div class="col-sm-2 col-xs-0" />
       </div>
       <div class="row">
-        <label for="password" class="col-4">パスワード</label>
-        <input type="password" name="password" v-model="password" class="col-6" />
-        <div class="col-2" />
+        <label for="password" class="col-sm-4 col-xs-12">パスワード</label>
+        <input type="password" name="password" v-model="password" class="col-sm-6 col-xs-12" />
+        <div class="col-sm-2 col-xs-0" />
       </div>
       <div class="row">
-        <div class="col-4" />
-        <button class="col-4" @click="login">ログイン</button>
-        <div class="col-4" />
+        <div class="col-sm-4 col-xs-12" />
+        <button class="col-sm-4 col-xs-12" @click="login">ログイン</button>
+        <div class="col-sm-4 col-xs-12" />
       </div>
     </div>
   </div>
@@ -126,7 +126,8 @@ export default class extends Vue {
   color: $paragraph-color;
   background-color: $background-color;
   box-shadow: 0px 0px 50px -15px #1a1a1a;
-  width: 500px;
+  padding: 30px;
+  max-width: 500px;
   min-height: 200px;
   .row {
     label {
