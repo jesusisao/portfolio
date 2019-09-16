@@ -18,12 +18,12 @@
         :key="index"
         :ref="`article${index}`"
       >
-        <font-awesome-icon :icon="article.icon" class="icon" />
         <article>
           <h1>
             <a :href="article.url" target="_blank" rel="noopener noreferrer">{{ article.title }}</a>
           </h1>
           <p v-for="(sentence, i) in article.sentences" :key="i">{{ sentence }}</p>
+          <font-awesome-icon :icon="article.icon" class="icon" />
         </article>
       </div>
     </div>
@@ -133,13 +133,16 @@ export default class extends Vue {
     max-width: 700px;
     box-sizing: border-box;
     box-shadow: 0px 0px 50px -15px #1a1a1a;
-    .icon {
-      width: 100px;
-      color: #838383;
-      font-size: 100px;
-      margin: 0 20px 20px 0;
-    }
     article {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .icon {
+        width: 100px;
+        color: #838383;
+        font-size: 100px;
+        margin: 5px;
+      }
       h1 {
         color: $title-color;
         text-align: left;
