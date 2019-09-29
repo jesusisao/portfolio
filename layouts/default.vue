@@ -5,6 +5,7 @@
       <!-- このDOMを渡してWebGLのカメラの操作をさせる -->
       <div
         class="camera-controller"
+        :class="{hidden: (!isRunning || shouldBeStopped)}"
         ref="cameraController"
         title="このアイコンの上でドラッグやスクロールを行うと、WebGLのカメラが動かせます。"
       >
@@ -332,5 +333,9 @@ $title-color: #8b8200;
 .slide-splitter {
   border-top: #a3a3a3 solid 3px;
   margin-right: 40px;
+}
+
+.hidden {
+  visibility: hidden;
 }
 </style>
