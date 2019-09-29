@@ -83,7 +83,7 @@ export default class ParticleCanvas extends Vue {
 
     for (let i = 0; i < 10; i++) {
       const material = new THREE.PointsMaterial({
-        size: randomRange(20, 40),
+        size: randomRange(20, 60),
         map: this.createCanvasMaterial(
           255,
           randomRange(146, 246),
@@ -111,7 +111,8 @@ export default class ParticleCanvas extends Vue {
       canvas: canvas
     });
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(canvasWidth, canvasHeight);
+    // particleの中心が画面外に出たとき突然particleが消失したように見えるのを防ぐため+100する
+    renderer.setSize(canvasWidth + 100, canvasHeight + 100);
 
     const camera = new THREE.PerspectiveCamera(45, canvasWidth / canvasHeight);
     camera.position.set(0, 0, 500);
@@ -123,7 +124,7 @@ export default class ParticleCanvas extends Vue {
     this.moveRunningIdsToTerminateIds();
     const pid = new Date().getTime();
     this.addRunningIds(pid);
-    this.updateCanvas(this, renderer, canvasWidth, canvasHeight, pid)(
+    this.updateCanvas(this, renderer, pid)(
       scene,
       camera,
       controls
@@ -133,14 +134,12 @@ export default class ParticleCanvas extends Vue {
   private updateCanvas = (
     self: any,
     renderer: THREE.WebGLRenderer,
-    canvasWidth: number,
-    canvasHeight: number,
     pid: number
   ) => (scene: THREE.Scene, camera: THREE.PerspectiveCamera, controls: any) => {
     // thisへはアクセスできないので注意
     if (self.shouldProcessBeTerminated(pid)) return;
     const recursion = () =>
-      self.updateCanvas(self, renderer, canvasWidth, canvasHeight, pid)(
+      self.updateCanvas(self, renderer, pid)(
         scene,
         camera,
         controls
