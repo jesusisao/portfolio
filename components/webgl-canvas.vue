@@ -77,8 +77,6 @@ export default class ParticleCanvas extends Vue {
       );
     }
 
-    // --------------------------------------------
-
     const scene = new THREE.Scene();
 
     for (let i = 0; i < 10; i++) {
@@ -115,10 +113,10 @@ export default class ParticleCanvas extends Vue {
     renderer.setSize(canvasWidth + 100, canvasHeight + 100);
 
     const camera = new THREE.PerspectiveCamera(45, canvasWidth / canvasHeight);
-    camera.position.set(0, 0, 500);
+    camera.position.set(0, 0, 1000);
     const controls = new OrbitControls(camera, this.cameraController);
     controls.autoRotate = true;
-    controls.autoRotateSpeed = 0.5;
+    controls.autoRotateSpeed = 1.5;
 
     // start animation
     this.moveRunningIdsToTerminateIds();
@@ -151,15 +149,14 @@ export default class ParticleCanvas extends Vue {
       const object = scene.children[i];
       if (object instanceof THREE.Points) {
         if (i % 3 === 0)
-          object.rotation.x = time * (i < 5 ? i + 1 : -(i + 1)) * 0.08;
+          object.rotation.x = time * (i < 5 ? i + 1 : -(i + 1)) * 0.1;
         if (i % 3 === 1)
-          object.rotation.y = time * (i < 5 ? i + 1 : -(i + 1)) * 0.08;
+          object.rotation.y = time * (i < 5 ? i + 1 : -(i + 1)) * 0.1;
         if (i % 3 === 2)
-          object.rotation.z = time * (i < 5 ? i + 1 : -(i + 1)) * 0.08;
+          object.rotation.z = time * (i < 5 ? i + 1 : -(i + 1)) * 0.1;
       }
     }
 
-    // ---------------------------------------------
     controls.update();
     renderer.render(scene, camera);
 
